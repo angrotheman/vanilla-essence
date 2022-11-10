@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@antoniogross/style-test": ["libs/vanilla-extract-plus/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

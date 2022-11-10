@@ -1,0 +1,35 @@
+{
+  "name": "vanilla-extract-plus",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/vanilla-extract-plus/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/vanilla-extract-plus",
+        "tsConfig": "libs/vanilla-extract-plus/tsconfig.lib.json",
+        "packageJson": "libs/vanilla-extract-plus/package.json",
+        "main": "libs/vanilla-extract-plus/src/index.ts",
+        "assets": ["libs/vanilla-extract-plus/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/vanilla-extract-plus/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/vanilla-extract-plus/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
