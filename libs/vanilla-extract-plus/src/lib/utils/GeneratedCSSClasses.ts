@@ -34,3 +34,5 @@ export class GeneratedCSSClasses {
     return this;
   }
 }
+
+export const generatedClasses = new GeneratedCSSClasses();

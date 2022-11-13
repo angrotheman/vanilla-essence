@@ -3,23 +3,16 @@ import {
   FeatureQueries,
   StyleWithSelectors,
 } from '@vanilla-extract/css/dist/declarations/src/types';
-import { MagicValueObject } from './magicValues';
-import { styleV2 } from './styleV2';
+import { styleV2 } from '../styleV2';
 import { CSSProperties } from '@vanilla-extract/css';
-import { createOrReuseResponsiveClass } from './createClass';
+import { AvailableBreakpoints } from './generatedMediaQueries';
+import { createOrReuseResponsiveClass } from './createResponsiveClass';
+import { MagicValueObject } from '../utils/types';
 
-export const breakpoints = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  '2xl': 1536,
-} as const;
-
-type ResponsiveStyleV2Keys = 'default' | keyof typeof breakpoints;
+type ResponsiveStyleV2Key = 'default' | AvailableBreakpoints;
 
 type ResponsiveStyleV2Props = {
-  [k in ResponsiveStyleV2Keys]?: StyleWithSelectors &
+  [k in ResponsiveStyleV2Key]?: StyleWithSelectors &
     FeatureQueries<StyleWithSelectors> &
     MagicValueObject;
 };
@@ -27,9 +20,7 @@ type ResponsiveStyleV2Props = {
 export const responsiveStyleV2 = (givenStyles: ResponsiveStyleV2Props) => {
   const givenStyleRule: ComplexStyleRule = [];
 
-  const givenStylesKeys = Object.keys(givenStyles) as Array<
-    keyof typeof givenStyles
-  >;
+  const givenStylesKeys = Object.keys(givenStyles) as ResponsiveStyleV2Key[];
 
   givenStylesKeys.forEach((breakpointKey) => {
     if (breakpointKey === 'default') {

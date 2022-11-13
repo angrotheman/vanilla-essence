@@ -1,29 +1,29 @@
 import { CSSProperties, style } from '@vanilla-extract/css';
 import { clsx } from 'clsx';
-import { StyleV2Props } from './types';
-import { MagicValueKeys } from './magicValues';
+import { StyleV2Props } from '../utils/types';
 import { createOrReuseClass } from './createClass';
 
-const simpleStyleV2 = (givenStyles: StyleV2Props) => {
-  const classes: string[] = [];
+const createStyleClass = (givenStyles: StyleV2Props) => {
+  const cssClasses: string[] = [];
 
   Object.entries(givenStyles).forEach(([prop, value]) => {
-    const typedProp = prop as keyof CSSProperties | MagicValueKeys;
+    const typedProp = prop as keyof CSSProperties;
 
-    if (prop === '@media') {
-      classes.push(style({ [prop]: value }));
+    if (prop === '@media' || prop === 'selectors') {
+      // TODO: should also use the `createOrReuseClass` method
+      cssClasses.push(style({ [prop]: value }));
       return;
     }
 
     const valueClass = createOrReuseClass({
-      prop: typedProp as keyof CSSProperties,
+      prop: typedProp,
       value,
     });
 
-    classes.push(valueClass);
+    cssClasses.push(valueClass);
   });
 
-  return classes;
+  return cssClasses;
 };
 
 export const styleV2 = (givenStyles: StyleV2Props) => {
@@ -34,13 +34,13 @@ export const styleV2 = (givenStyles: StyleV2Props) => {
       if (typeof givenStyle === 'string') {
         generatedClasses.push(givenStyle);
       } else {
-        const classes = simpleStyleV2(givenStyle);
+        const classes = createStyleClass(givenStyle);
         generatedClasses.push(...classes);
       }
     });
 
     return clsx(generatedClasses);
   } else {
-    return clsx(simpleStyleV2(givenStyles));
+    return clsx(createStyleClass(givenStyles));
   }
 };
