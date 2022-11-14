@@ -27,7 +27,7 @@ const createStyleClass = (givenStyles: StyleV2Props) => {
   return cssClasses;
 };
 
-export const styleV2 = (givenStyles: StyleV2Props) => {
+export const styleV2 = (givenStyles: StyleV2Props): string => {
   if (Array.isArray(givenStyles)) {
     const finalClasses: string[] = [];
 
