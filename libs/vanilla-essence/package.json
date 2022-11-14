@@ -1,5 +1,9 @@
 {
   "name": "@antoniogross/vanilla-essence",
   "version": "0.0.1",
-  "description": "Vanilla Extract, but with more features"
+  "description": "Vanilla Extract, but with some more useful features",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angrotheman/vanilla-essence.git"
+  }
 }

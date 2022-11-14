@@ -1,4 +1,4 @@
-# Vanilla Esscence
+# Vanilla Essence
 
 This library is based on [Vanilla Extract](https://vanilla-extract.style/), and adds key features of [Tailwind CSS](https://tailwindcss.com/) and [Stylex](https://www.youtube.com/watch?v=ur-sGzUWId4).
 
