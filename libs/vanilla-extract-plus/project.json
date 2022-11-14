@@ -12,7 +12,8 @@
         "tsConfig": "libs/vanilla-extract-plus/tsconfig.lib.json",
         "packageJson": "libs/vanilla-extract-plus/package.json",
         "main": "libs/vanilla-extract-plus/src/index.ts",
-        "assets": ["libs/vanilla-extract-plus/*.md"]
+        "assets": ["libs/vanilla-extract-plus/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies"
       }
     },
     "lint": {
