@@ -1,11 +1,14 @@
-# vanilla-extract-plus
+# Vanilla Esscence
 
-This library was generated with [Nx](https://nx.dev).
+This library is based on [Vanilla Extract](https://vanilla-extract.style/), and adds key features of [Tailwind CSS](https://tailwindcss.com/) and [Stylex](https://www.youtube.com/watch?v=ur-sGzUWId4).
 
-## Running unit tests
+First read the documentation of [Vanilla Extract](https://vanilla-extract.style/). It works exactly the same, only now with a few more advantages.
 
-Run `nx test vanilla-extract-plus` to execute the unit tests via [Jest](https://jestjs.io).
+If you currently use [Vanilla Extract](https://vanilla-extract.style/), you can simply swap the library and everything should run fine.
 
-## Running lint
+## Key Differences to Vanilla Extract are:
 
-Run `nx lint vanilla-extract-plus` to execute the lint via [ESLint](https://eslint.org/).
+- A CSS class is created for each CSS property. This way the last class always wins and it is extremely easy to override the styling. You will also have a smaller bundled file size due to no repetitions. (currently this is not available for responsive styling).
+- It automatically converts any numeric value to a rem value. (currently enabled for: `fontSize, letterSpacing, lineHeight`).
+- It adds _"Magic Values"_. You may already know this from the sprinkles API. There it is called `shorthands`. Currently available is: `paddingX, paddingY, marginX, marginY`. You can just use it inside the `style` API.
+- It provides a new `responsiveStyle` API.
