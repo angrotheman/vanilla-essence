@@ -10,9 +10,7 @@ const createResponsiveClass = ({
   value,
   breakpointKey,
 }: ResponsiveCSSProp) => {
-  let styleConfig: ComplexStyleRule = {};
-
-  styleConfig = {
+  const styleConfig: ComplexStyleRule = {
     '@media': {
       [generatedMediaQueries[breakpointKey]]: {
         [prop]: convertCSSValue({ prop, value }),

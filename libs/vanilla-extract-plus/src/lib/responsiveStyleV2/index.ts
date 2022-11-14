@@ -8,6 +8,7 @@ import { CSSProperties } from '@vanilla-extract/css';
 import { AvailableBreakpoints } from './generatedMediaQueries';
 import { createOrReuseResponsiveClass } from './createResponsiveClass';
 import { MagicValueObject } from '../utils/types';
+import { clsx } from 'clsx';
 
 type ResponsiveStyleV2Key = 'default' | AvailableBreakpoints;
 
@@ -42,5 +43,5 @@ export const responsiveStyleV2 = (givenStyles: ResponsiveStyleV2Props) => {
     }
   });
 
-  return styleV2(givenStyleRule);
+  return clsx(givenStyleRule);
 };

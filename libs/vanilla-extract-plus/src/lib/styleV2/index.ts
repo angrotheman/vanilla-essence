@@ -1,5 +1,6 @@
 import { CSSProperties, style } from '@vanilla-extract/css';
 import { clsx } from 'clsx';
+import { generatedClasses } from '../utils/GeneratedCSSClasses';
 import { StyleV2Props } from '../utils/types';
 import { createOrReuseClass } from './createClass';
 
@@ -28,18 +29,18 @@ const createStyleClass = (givenStyles: StyleV2Props) => {
 
 export const styleV2 = (givenStyles: StyleV2Props) => {
   if (Array.isArray(givenStyles)) {
-    const generatedClasses: string[] = [];
+    const finalClasses: string[] = [];
 
     givenStyles.forEach((givenStyle) => {
       if (typeof givenStyle === 'string') {
-        generatedClasses.push(givenStyle);
+        finalClasses.push(givenStyle);
       } else {
         const classes = createStyleClass(givenStyle);
-        generatedClasses.push(...classes);
+        finalClasses.push(...classes);
       }
     });
 
-    return clsx(generatedClasses);
+    return clsx(generatedClasses.cleanUpClasses(finalClasses));
   } else {
     return clsx(createStyleClass(givenStyles));
   }
