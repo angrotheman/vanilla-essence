@@ -8,11 +8,11 @@ type GeneratedClasses = {
 type CombinedCssProp = CSSProp | ResponsiveCSSProp;
 
 const convertCSSPropToObjectKey = (cssProp: CombinedCssProp) => {
-  return Object.values(cssProp).join('_');
+  return Object.values(cssProp).join('||');
 };
 
 const convertObjectKeyToCSSProp = (cssClass: string) => {
-  const [prop, value] = cssClass.split('_');
+  const [prop, value] = cssClass.split('||');
   return { [prop]: value } as {
     [k in CombinedCssProp['prop']]: CombinedCssProp['value'];
   };
