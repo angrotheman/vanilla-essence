@@ -7,13 +7,15 @@ import { styleV2 } from '../styleV2';
 import { CSSProperties } from '@vanilla-extract/css';
 import { AvailableBreakpoints } from './generatedMediaQueries';
 import { createOrReuseResponsiveClass } from './createResponsiveClass';
-import { MagicValueObject } from '../utils/types';
+import { MagicValueObject, StyleV2Props } from '../utils/types';
 import { clsx } from 'clsx';
 
 type ResponsiveStyleV2Key = 'default' | AvailableBreakpoints;
 
 type ResponsiveStyleV2Props = {
-  [k in ResponsiveStyleV2Key]?: StyleWithSelectors &
+  default?: StyleV2Props;
+} & {
+  [k in AvailableBreakpoints]?: StyleWithSelectors &
     FeatureQueries<StyleWithSelectors> &
     MagicValueObject;
 };

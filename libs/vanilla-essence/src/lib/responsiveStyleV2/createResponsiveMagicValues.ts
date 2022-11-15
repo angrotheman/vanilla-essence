@@ -25,7 +25,7 @@ export const createResponsiveMagicValueCSSClass: ResponsiveMagicValues =
         responsiveStyleV2({
           [breakpointKey]: Object.assign(
             {},
-            ...values.map((cssProp) => ({ [cssProp]: value }))
+            ...values.map((cssProp: string) => ({ [cssProp]: value }))
           ),
         });
 
