@@ -74,7 +74,7 @@ export class GeneratedCSSClasses {
       (i) => typeof i === 'string'
     );
 
-    return [styleV2(cleanedUpCSSClasses), otherCSSClasses];
+    return [otherCSSClasses, styleV2(cleanedUpCSSClasses)];
   }
 }
 

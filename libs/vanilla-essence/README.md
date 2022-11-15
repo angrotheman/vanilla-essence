@@ -12,3 +12,13 @@ If you currently use [Vanilla Extract](https://vanilla-extract.style/), you can 
 - It automatically converts any numeric value to a rem value. (currently enabled for: `fontSize, letterSpacing, lineHeight`).
 - It adds _"Magic Values"_. You may already know this from the sprinkles API. There it is called `shorthands`. Currently available is: `paddingX, paddingY, marginX, marginY`. You can just use it inside the `style` API.
 - It provides a new `responsiveStyle` API.
+- It provides a new `createUniqueIdentifier` method which is useful when you need to use `globalStyle` to style a child element of a css class.
+
+  ```js
+  const identifier = createUniqueIdentifier();
+
+  const a = style([identifier, { color: 'red' }]);
+  const b = globalStyle(`${identifier} svg`, {
+    width: '100%',
+  });
+  ```
