@@ -30,7 +30,7 @@ const combinedClass2 = style([
 
 - It automatically converts any numeric value to a rem value. (currently enabled for: `fontSize, letterSpacing, lineHeight`).
 - It adds _"Magic Values"_. You may already know this from the sprinkles API. There it is called `shorthands`. Currently available is: `paddingX, paddingY, marginX, marginY`. You can just use it inside the `style` API.
-- It provides a new `responsiveStyle` API. Currently it uses the same breakpoints as you know from [Tailwind CSS](https://tailwindcss.com/docs/responsive-design)
+- It provides a new `responsiveStyle` API. Currently it uses the same breakpoints as you know from [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
 
 ```js
 const responsiveClass = responsiveStyle({
@@ -64,6 +64,8 @@ const b = globalStyle(`${identifier} svg`, {
   width: '100%',
 });
 ```
+
+---
 
 ### Known, currently necessary workarounds
 
