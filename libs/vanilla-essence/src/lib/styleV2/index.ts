@@ -3,6 +3,7 @@ import { clsx } from 'clsx';
 import { cleanUpClasses } from '../utils/cleanUpClasses';
 import { StyleV2Props } from '../utils/types';
 import { createOrReuseClass } from './createClass';
+import { expandProperty } from 'inline-style-expand-shorthand';
 
 const createStyleClass = (givenStyles: StyleV2Props) => {
   const cssClasses: string[] = [];
@@ -14,12 +15,30 @@ const createStyleClass = (givenStyles: StyleV2Props) => {
       cssClasses.push(style({ [prop]: value }));
       return;
     } else {
-      const valueClass = createOrReuseClass({
-        prop: typedProp,
-        value,
-      });
+      const longhands:
+        | undefined
+        | {
+            [k in keyof CSSProperties]: string;
+          } = expandProperty(prop, value);
 
-      cssClasses.push(valueClass);
+      if (longhands) {
+        Object.entries(longhands).forEach(([longProp, longVal]) => {
+          const longHandValueClass = createOrReuseClass({
+            prop: longProp as keyof CSSProperties,
+            value: !isNaN(Number(longVal)) ? Number(longVal) : longVal,
+          });
+
+          cssClasses.push(longHandValueClass);
+        });
+      } else {
+        const valueClass = createOrReuseClass({
+          prop: typedProp,
+          value,
+        });
+
+        cssClasses.push(valueClass);
+      }
+
       return;
     }
   });

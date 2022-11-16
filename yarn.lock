@@ -3420,6 +3420,11 @@ inherits@2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==
 
+inline-style-expand-shorthand@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/inline-style-expand-shorthand/-/inline-style-expand-shorthand-1.4.0.tgz#9ee2eca4a8e65e17a353ff02031f8ca82900a8d2"
+  integrity sha512-FBxbgh1+ziiPFA09s0JgYtB7gRYfbfVrcO1sTv2JnPwbbz0M35zSYVUR3oyrTfLo/S+sbY4JG1W16hY91Hbh/Q==
+
 ipaddr.js@1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
