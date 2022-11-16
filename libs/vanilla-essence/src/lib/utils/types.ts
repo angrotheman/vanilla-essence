@@ -14,6 +14,8 @@ export type ResponsiveCSSProp = CSSProp & {
   breakpointKey: AvailableBreakpoints;
 };
 
+export type CombinedCssProp = CSSProp | ResponsiveCSSProp;
+
 export type MagicValueKeys = keyof typeof magicProps;
 
 export type MagicValueObject = { [k in MagicValueKeys]?: number | string };

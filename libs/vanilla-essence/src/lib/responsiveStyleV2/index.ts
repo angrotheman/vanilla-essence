@@ -12,7 +12,7 @@ import { clsx } from 'clsx';
 
 type ResponsiveStyleV2Key = 'default' | AvailableBreakpoints;
 
-type ResponsiveStyleV2Props = {
+export type ResponsiveStyleV2Props = {
   default?: StyleV2Props;
 } & {
   [k in AvailableBreakpoints]?: StyleWithSelectors &

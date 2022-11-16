@@ -1,6 +1,6 @@
 import { CSSProperties, style } from '@vanilla-extract/css';
 import { clsx } from 'clsx';
-import { generatedClasses } from '../utils/GeneratedCSSClasses';
+import { cleanUpClasses } from '../utils/cleanUpClasses';
 import { StyleV2Props } from '../utils/types';
 import { createOrReuseClass } from './createClass';
 
@@ -10,18 +10,18 @@ const createStyleClass = (givenStyles: StyleV2Props) => {
   Object.entries(givenStyles).forEach(([prop, value]) => {
     const typedProp = prop as keyof CSSProperties;
 
-    if (prop === '@media' || prop === 'selectors') {
-      // TODO: should also use the `createOrReuseClass` method
+    if (typeof value === 'object') {
       cssClasses.push(style({ [prop]: value }));
       return;
+    } else {
+      const valueClass = createOrReuseClass({
+        prop: typedProp,
+        value,
+      });
+
+      cssClasses.push(valueClass);
+      return;
     }
-
-    const valueClass = createOrReuseClass({
-      prop: typedProp,
-      value,
-    });
-
-    cssClasses.push(valueClass);
   });
 
   return cssClasses;
@@ -40,7 +40,9 @@ export const styleV2 = (givenStyles: StyleV2Props): string => {
       }
     });
 
-    return clsx(generatedClasses.cleanUpClasses(finalClasses));
+    const cleanedUpClasses = cleanUpClasses(finalClasses);
+
+    return clsx(cleanedUpClasses);
   } else {
     return clsx(createStyleClass(givenStyles));
   }
