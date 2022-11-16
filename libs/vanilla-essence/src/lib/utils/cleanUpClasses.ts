@@ -13,13 +13,11 @@ import {
 export const cleanUpClasses = (cssClasses: Array<string>) => {
   const flattedCssClasses = simplifyCssClasses(cssClasses);
 
-  const swappedClasses = generatedClasses.getAllSwappedClasses();
-
   const convertedCSSClasses = flattedCssClasses.map((cssClass) => {
-    const values = swappedClasses[cssClass];
+    const value = generatedClasses.getByClassName(cssClass);
 
-    if (values) {
-      return convertObjectKeyToCSSProp(values);
+    if (value) {
+      return convertObjectKeyToCSSProp(value);
     }
 
     return cssClass;

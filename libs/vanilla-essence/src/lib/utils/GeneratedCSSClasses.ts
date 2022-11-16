@@ -7,9 +7,11 @@ type GeneratedClasses = {
 
 export class GeneratedCSSClasses {
   #generatedClasses: GeneratedClasses;
+  #reverseGeneratedClasses: GeneratedClasses;
 
   constructor(initialClasses: GeneratedClasses = {}) {
     this.#generatedClasses = initialClasses;
+    this.#reverseGeneratedClasses = {};
   }
 
   delete(cssProp: CombinedCssProp) {
@@ -20,6 +22,10 @@ export class GeneratedCSSClasses {
     return this.#generatedClasses[convertCSSPropToObjectKey(cssProp)];
   }
 
+  getByClassName(className: string) {
+    return this.#reverseGeneratedClasses[className];
+  }
+
   has(cssProp: CombinedCssProp) {
     return Boolean(this.#generatedClasses[convertCSSPropToObjectKey(cssProp)]);
   }
@@ -28,14 +34,8 @@ export class GeneratedCSSClasses {
     const key = convertCSSPropToObjectKey(cssProp);
 
     this.#generatedClasses[key] = cssClass;
+    this.#reverseGeneratedClasses[cssClass] = key;
     return this;
-  }
-
-  getAllSwappedClasses() {
-    return Object.keys(this.#generatedClasses).reduce((ret, key) => {
-      ret[this.#generatedClasses[key]] = key;
-      return ret;
-    }, {});
   }
 }
 
