@@ -1,5 +1,3 @@
-import { CSSProp } from '../types';
-
-export const getOnlyStrings = <T extends string | CSSProp>(
+export const getOnlyStrings = <T extends string>(
   cssClass: T
-): cssClass is Exclude<T, CSSProp> => typeof cssClass === 'string';
+): cssClass is Extract<T, string> => typeof cssClass === 'string';
