@@ -1,10 +1,17 @@
 import { CSSProperties } from '@vanilla-extract/css';
-import { ClassNames } from '@vanilla-extract/css/dist/declarations/src/types';
+import {
+  ClassNames,
+  StyleRule,
+} from '@vanilla-extract/css/dist/declarations/src/types';
+
+export type MagicPropsRule<C extends MagicPropsConfig> = {
+  [k in keyof C]?: number | string;
+};
 
 export type CustomStyleRule = Record<string, unknown>;
-export type CustomComplexStyle<CSR = CustomStyleRule> =
-  | CSR
-  | (CSR | ClassNames)[];
+export type CustomComplexStyle<C extends InitStyleConfig> =
+  | (StyleRule & MagicPropsRule<C['magicProps']>)
+  | ((StyleRule & MagicPropsRule<C['magicProps']>) | ClassNames)[];
 
 export type MagicPropsConfig = { [k in string]: Array<keyof CSSProperties> };
 export type RemPropListConfig = Array<keyof CSSProperties>;

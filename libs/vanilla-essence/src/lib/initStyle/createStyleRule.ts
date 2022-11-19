@@ -38,7 +38,7 @@ const convertStyleRule = <
 };
 
 export const createComplexStyleRule = <
-  CSR extends CustomComplexStyle,
+  CSR extends CustomComplexStyle<C>,
   C extends InitStyleConfig
 >({
   givenStyle,

@@ -1,17 +1,10 @@
 import type { CustomComplexStyle, InitStyleConfig } from './types';
-import type { StyleRule } from '@vanilla-extract/css/dist/declarations/src/types';
 import { createMagicValueCSSClasses } from './createMagicValueCSSClasses';
 import { createComplexStyleRule } from './createStyleRule';
 import { style as vanillaStyle } from '@vanilla-extract/css';
 
 export const initStyle = <C extends InitStyleConfig>(config: C) => {
-  type MagicPropsKeys = keyof C['magicProps'];
-  type MagicPropsRule = {
-    [k in MagicPropsKeys]?: number | string;
-  };
-
-  type CombinedStyleRule = StyleRule & MagicPropsRule;
-  type StyleProps = CustomComplexStyle<CombinedStyleRule>;
+  type StyleProps = CustomComplexStyle<C>;
 
   // ------
 
