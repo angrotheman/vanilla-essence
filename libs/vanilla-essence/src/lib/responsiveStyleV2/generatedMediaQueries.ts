@@ -4,14 +4,20 @@ const { breakpoints } = config;
 
 export type AvailableBreakpoints = keyof typeof breakpoints;
 
-enum Feature {
+export enum MediaQuerySizeType {
   minWidth = 'min-width',
   maxWidth = 'max-width',
 }
 
-type MediaQueryType<T extends Feature, N extends number> = `(${T}: ${N}px)`;
+type MediaQueryType<
+  T extends MediaQuerySizeType,
+  N extends number
+> = `(${T}: ${N}px)`;
 
-const generateTypedMediaQuery = <T extends Feature, N extends number>({
+export const generateTypedMediaQuery = <
+  T extends MediaQuerySizeType,
+  N extends number
+>({
   type,
   size,
 }: {
@@ -23,12 +29,15 @@ const generateTypedMediaQuery = <T extends Feature, N extends number>({
 
 export const generatedMediaQueries: {
   [k in AvailableBreakpoints]: MediaQueryType<
-    Feature.minWidth,
+    MediaQuerySizeType.minWidth,
     typeof breakpoints[k]
   >;
 } = Object.assign(
   {},
   ...Object.entries(breakpoints).map(([key, minW]) => ({
-    [key]: generateTypedMediaQuery({ type: Feature.minWidth, size: minW }),
+    [key]: generateTypedMediaQuery({
+      type: MediaQuerySizeType.minWidth,
+      size: minW,
+    }),
   }))
 );

@@ -8,7 +8,7 @@ export const createMagicValueCSSClasses = <T extends MagicPropsConfig>(
 } => {
   return Object.assign(
     {},
-    ...Object.entries(magicValuesConfig).map(([key, values]) => {
+    ...Object.entries(magicValuesConfig ?? {}).map(([key, values]) => {
       const magicValue = (value: number | string) =>
         Object.assign({}, ...values.map((cssProp) => ({ [cssProp]: value })));
 

@@ -1,10 +1,16 @@
-import type { CustomComplexStyle, InitStyleConfig } from './types';
+import type {
+  CustomComplexStyle,
+  CustomResponsiveStyle,
+  InitStyleConfig,
+} from './types';
 import { createMagicValueCSSClasses } from './createMagicValueCSSClasses';
-import { createComplexStyleRule } from './createStyleRule';
+import { createComplexStyleRule } from './createComplexStyleRule';
 import { style as vanillaStyle } from '@vanilla-extract/css';
+import { createResponsiveStyleRule } from './createResponsiveStyleRule';
 
 export const initStyle = <C extends InitStyleConfig>(config: C) => {
   type StyleProps = CustomComplexStyle<C>;
+  type ResponsiveStyleProps = CustomResponsiveStyle<C>;
 
   // ------
 
@@ -23,39 +29,22 @@ export const initStyle = <C extends InitStyleConfig>(config: C) => {
       })
     );
 
+  const completeResponsiveStyle = (
+    givenResponsiveStyle: ResponsiveStyleProps
+  ) =>
+    vanillaStyle(
+      createResponsiveStyleRule({
+        givenResponsiveStyle,
+        config,
+        magicValueMethods,
+      })
+    );
+
   return {
     style: completeStyle,
-    // responsiveStyle
+    responsiveStyle: completeResponsiveStyle,
   };
 };
-
-/*
-const { style } = initStyle({
-  useAtomicCSS: true,
-  magicProps: {
-    paddingX: ['paddingLeft', 'paddingRight'],
-    paddingY: ['paddingTop', 'paddingBottom'],
-    marginX: ['marginLeft', 'marginRight'],
-    marginY: ['marginTop', 'marginBottom'],
-  },
-  remPropList: ['fontSize', 'letterSpacing', 'lineHeight'],
-  breakpoints: {
-    sm: 640, // maybe this should be the whole media rule for better customization
-    md: 768,
-    lg: 1024,
-    xl: 1280,
-    '2xl': 1536,
-  },
-});
-
-// -----------------
-
-style({
-  marginTop: 20,
-  paddingX: 20,
-  fontSize: 20,
-});
-*/
 
 // maybe save order of styles (does it make sense?????)
 // convert magicProps and rem sizes
