@@ -6,8 +6,8 @@ import config from '../../config/default';
 const { remPropList } = config;
 
 export const convertCSSValue = ({ prop, value }: CSSProp) => {
-  // should convert to rem
-  if (typeof value === 'number' && includes(remPropList, prop)) {
+  // never should be improved, but seems this method is depricated
+  if (typeof value === 'number' && includes(remPropList as never, prop)) {
     return convertPxToRem(value);
   }
   return value;
