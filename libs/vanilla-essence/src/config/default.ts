@@ -1,4 +1,4 @@
-import { defineConfig } from '../lib/utils/_defineConfig';
+import { defineConfig } from '../lib/defineConfig';
 
 const defaultConfig = defineConfig({
   breakpoints: {

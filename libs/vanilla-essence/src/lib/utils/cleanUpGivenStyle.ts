@@ -1,8 +1,8 @@
 import { ClassNames } from '@vanilla-extract/css/dist/declarations/src/types';
-import { getOnlyProps } from '../utils/filters/getOnlyProps';
-import { getOnlyStrings } from '../utils/filters/getOnlyStrings';
-import { simplifyCssClasses } from '../utils/simplifyCssClasses';
-import { CustomStyleRule } from './types';
+import { getOnlyProps } from './filters/getOnlyProps';
+import { getOnlyStrings } from './filters/getOnlyStrings';
+import { simplifyCssClasses } from './simplifyCssClasses';
+import { CustomStyleRule } from '../types';
 
 const flatArrayItems = <CSR extends CustomStyleRule>(
   styles: (CSR | ClassNames)[]

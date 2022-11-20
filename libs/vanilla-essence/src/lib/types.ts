@@ -37,6 +37,3 @@ export interface InitStyleConfig {
   remPropList?: RemPropListConfig;
   breakpoints?: BreakpointsConfig;
 }
-
-// type BetterBreakpointsConfig<C extends { [k in string]: number }> = C;
-// type usingBreakpointsConfig = Test<{ md: 2 }>;

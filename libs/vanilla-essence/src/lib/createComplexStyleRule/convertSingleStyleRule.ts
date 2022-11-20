@@ -1,14 +1,8 @@
-import { convertPxToRem } from '../utils/transformValues/convertPxToRem';
-import { cleanUpGivenStyle } from './cleanUpGivenStyle';
-import {
-  CustomComplexStyle,
-  CustomStyleRule,
-  InitStyleConfig,
-  MagicValueMethods,
-} from './types';
+import { CustomStyleRule, InitStyleConfig } from '../types';
 import { CSSProperties, StyleRule } from '@vanilla-extract/css';
+import { convertPxToRem } from '../utils/transformValues/convertPxToRem';
 
-export const convertStyleRule = <
+export const convertSingleStyleRule = <
   CSR extends CustomStyleRule,
   C extends InitStyleConfig
 >({
@@ -28,7 +22,7 @@ export const convertStyleRule = <
     let convertedVal = val;
 
     if (typeof val === 'object' && !Array.isArray(val)) {
-      convertedVal = convertStyleRule({
+      convertedVal = convertSingleStyleRule({
         styleRule: val as CustomStyleRule,
         config,
         magicValueMethods,
@@ -63,29 +57,4 @@ export const convertStyleRule = <
   });
 
   return convertedStyleRule;
-};
-
-export const createComplexStyleRule = <
-  CSR extends CustomComplexStyle<C>,
-  C extends InitStyleConfig
->({
-  givenStyle,
-  config,
-  magicValueMethods,
-}: {
-  givenStyle: CSR;
-  config: C;
-  magicValueMethods: MagicValueMethods<C['magicProps']>;
-}) => {
-  const { classNames, styleRules } = cleanUpGivenStyle(givenStyle);
-
-  const convertedStyleRules = styleRules.map((styleRule) =>
-    convertStyleRule({ styleRule, config, magicValueMethods })
-  );
-
-  if (config.useAtomicCSS) {
-    return ['atomic-will-come'];
-  }
-
-  return [...classNames, ...convertedStyleRules];
 };

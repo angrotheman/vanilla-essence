@@ -2,14 +2,14 @@ import { ComplexStyleRule } from '@vanilla-extract/css';
 import {
   generateTypedMediaQuery,
   MediaQuerySizeType,
-} from '../responsiveStyleV2/generatedMediaQueries';
-import { createComplexStyleRule } from './createComplexStyleRule';
+} from '../utils/generatedMediaQueries';
+import { createComplexStyleRule } from '../createComplexStyleRule';
 import {
   CustomComplexStyle,
   CustomResponsiveStyle,
   InitStyleConfig,
   MagicValueMethods,
-} from './types';
+} from '../types';
 
 export const createResponsiveStyleRule = <
   CRS extends CustomResponsiveStyle<C>,

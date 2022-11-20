@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-ignore
 import { CombinedCssProp, CSSProp, ResponsiveCSSProp } from '../types';
 
 export const convertObjectKeyToCSSProp = (

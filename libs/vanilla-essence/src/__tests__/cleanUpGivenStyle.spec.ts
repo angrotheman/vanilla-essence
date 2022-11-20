@@ -1,4 +1,4 @@
-import { cleanUpGivenStyle } from '../lib/initStyle/cleanUpGivenStyle';
+import { cleanUpGivenStyle } from '../lib/utils/cleanUpGivenStyle';
 
 describe('cleanUpGivenStyle', () => {
   test('base example', () => {

@@ -1,5 +1,5 @@
 import { StyleRule } from '@vanilla-extract/css';
-import { MagicPropsConfig } from './types';
+import { MagicPropsConfig } from '../types';
 
 export const createMagicValueCSSClasses = <T extends MagicPropsConfig>(
   magicValuesConfig: T

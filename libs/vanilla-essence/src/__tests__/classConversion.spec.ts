@@ -1,5 +1,5 @@
-import { convertCSSPropToObjectKey } from '../lib/utils/transformValues/convertCSSPropToObjectKey';
-import { convertObjectKeyToCSSProp } from '../lib/utils/transformValues/convertObjectKeyToCSSProp';
+import { convertCSSPropToObjectKey } from '../lib/utils/atomic/convertCSSPropToObjectKey';
+import { convertObjectKeyToCSSProp } from '../lib/utils/atomic/convertObjectKeyToCSSProp';
 
 describe('class conversion', () => {
   test('convert css prop', () => {

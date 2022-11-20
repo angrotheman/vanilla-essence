@@ -1,5 +1,5 @@
-import { convertCSSPropToObjectKey } from './transformValues/convertCSSPropToObjectKey';
-import { CombinedCssProp } from './types';
+import { CustomStyleRule } from '../../types';
+import { convertCSSPropToObjectKey } from './convertCSSPropToObjectKey';
 
 type GeneratedClasses = {
   [k: string]: string;
@@ -14,11 +14,11 @@ export class GeneratedCSSClasses {
     this.#reverseGeneratedClasses = {};
   }
 
-  delete(cssProp: CombinedCssProp) {
+  delete(cssProp: CustomStyleRule) {
     return delete this.#generatedClasses[convertCSSPropToObjectKey(cssProp)];
   }
 
-  get(cssProp: CombinedCssProp) {
+  get(cssProp: CustomStyleRule) {
     return this.#generatedClasses[convertCSSPropToObjectKey(cssProp)];
   }
 
@@ -26,11 +26,11 @@ export class GeneratedCSSClasses {
     return this.#reverseGeneratedClasses[className];
   }
 
-  has(cssProp: CombinedCssProp) {
+  has(cssProp: CustomStyleRule) {
     return Boolean(this.#generatedClasses[convertCSSPropToObjectKey(cssProp)]);
   }
 
-  set(cssProp: CombinedCssProp, cssClass: string) {
+  set(cssProp: CustomStyleRule, cssClass: string) {
     const key = convertCSSPropToObjectKey(cssProp);
 
     this.#generatedClasses[key] = cssClass;

@@ -1,7 +1,7 @@
-import { createComplexStyleRule } from '../lib/initStyle/createComplexStyleRule';
-import { defineConfig } from '../lib/utils/_defineConfig';
-import { CustomComplexStyle } from '../lib/initStyle/types';
-import { createMagicValueCSSClasses } from '../lib/initStyle/createMagicValueCSSClasses';
+import { createComplexStyleRule } from '../lib/createComplexStyleRule';
+import { defineConfig } from '../lib/defineConfig';
+import { CustomComplexStyle } from '../lib/types';
+import { createMagicValueCSSClasses } from '../lib/utils/createMagicValueCSSClasses';
 
 describe('createStyleRule', () => {
   const styleConfig = defineConfig({

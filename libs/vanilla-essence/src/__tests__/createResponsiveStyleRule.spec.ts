@@ -1,7 +1,7 @@
-import { createMagicValueCSSClasses } from '../lib/initStyle/createMagicValueCSSClasses';
-import { createResponsiveStyleRule } from '../lib/initStyle/createResponsiveStyleRule';
-import { CustomResponsiveStyle } from '../lib/initStyle/types';
-import { defineConfig } from '../lib/utils/_defineConfig';
+import { createMagicValueCSSClasses } from '../lib/utils/createMagicValueCSSClasses';
+import { createResponsiveStyleRule } from '../lib/createResponsiveStyleRule/index';
+import { CustomResponsiveStyle } from '../lib/types';
+import { defineConfig } from '../lib/defineConfig';
 
 describe('createResponsiveStyleRule', () => {
   const responsiveConfig = defineConfig({
