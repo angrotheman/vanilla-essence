@@ -46,13 +46,13 @@ const combinedClass2 = style([
 
 - **Rem Conversion:** It automatically converts a numeric value to a rem value. By default enabled for: `fontSize, letterSpacing, lineHeight`.
 
-  - **(You can customize these settings in `config.remPropList`).**
+  - **(You can customize these settings in `config.remPropList`). You can enable the conversion for any valiue with '\*'.**
 
-- It adds _"Magic Values"_. You may already know this from the sprinkles API. There it is called `shorthands`. By default available is: `paddingX, paddingY, marginX, marginY`. You can just use it inside the `style` API.
+- **Magic Values:** It adds _"Magic Values"_. You may already know this from the sprinkles API. There it is called `shorthands`. By default available is: `paddingX, paddingY, marginX, marginY`. You can just use it inside the `style` API.
 
   - **(You can customize these settings in `config.magicProps`).**
 
-- It provides a new `responsiveStyle` API. By default it uses the same breakpoints as you know from [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
+- **`responsiveStyle` API:** This allows for extremely fast implementation of Responsive Styling. By default it uses the same breakpoints as you know from [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
   - **(You can customize these settings in `config.breakpoints`).**
 
 ```js
@@ -75,7 +75,7 @@ const responsiveClass = responsiveStyle({
 });
 ```
 
-- It provides a new `createUniqueIdentifier` method which is useful when you need to use `globalStyle` to style a child element of a css class.
+- **`createUniqueIdentifier` method:** This method is useful when you need to use `globalStyle` to style a child element of a css class.
 
 ```js
 const identifier = createUniqueIdentifier();
@@ -85,6 +85,12 @@ const b = globalStyle(`${identifier} svg`, {
   width: '100%',
 });
 ```
+
+---
+
+### Preflight CSS / Reset CSS
+
+It is now very easy to reset the CSS. Just import `'@antoniogross/vanilla-essence/src/css/preflight.css'` and everything is done. The file is mostly based on [Tailwind's preflight file](https://unpkg.com/tailwindcss@3.2.4/src/css/preflight.css).
 
 ---
 

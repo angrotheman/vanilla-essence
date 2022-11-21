@@ -12,7 +12,11 @@
         "tsConfig": "libs/vanilla-essence/tsconfig.lib.json",
         "packageJson": "libs/vanilla-essence/package.json",
         "main": "libs/vanilla-essence/src/index.ts",
-        "assets": ["libs/vanilla-essence/*.md"],
+        "assets": [
+          "libs/vanilla-essence/*.md",
+          "libs/vanilla-essence/src/css/*.css"
+        ],
+
         "buildableProjectDepsInPackageJsonType": "dependencies"
       }
     },
