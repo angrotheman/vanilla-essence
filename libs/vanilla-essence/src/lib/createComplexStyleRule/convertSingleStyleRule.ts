@@ -2,6 +2,18 @@ import { CustomStyleRule, InitStyleConfig } from '../types';
 import { CSSProperties, StyleRule } from '@vanilla-extract/css';
 import { convertPxToRem } from '../utils/transformValues/convertPxToRem';
 
+const forbiddenRemValues: Array<keyof CSSProperties> = [
+  'fontWeight',
+  'opacity',
+  'zIndex',
+  'flex',
+  'flexGrow',
+  'flexShrink',
+  'WebkitLineClamp',
+  'order',
+  'scale',
+];
+
 export const convertSingleStyleRule = <
   CSR extends CustomStyleRule,
   C extends InitStyleConfig
@@ -31,7 +43,9 @@ export const convertSingleStyleRule = <
 
     // rem conversion
     if (
-      config.remPropList.includes(prop as keyof CSSProperties) &&
+      (config.remPropList === '*'
+        ? !forbiddenRemValues.includes(prop as keyof CSSProperties)
+        : config.remPropList.includes(prop as keyof CSSProperties)) &&
       typeof val === 'number'
     ) {
       convertedVal = convertPxToRem(val);

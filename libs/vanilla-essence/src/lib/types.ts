@@ -24,7 +24,7 @@ export type CustomResponsiveStyle<C extends InitStyleConfig> = {
 };
 
 export type MagicPropsConfig = { [k in string]: Array<keyof CSSProperties> };
-export type RemPropListConfig = Array<keyof CSSProperties>;
+export type RemPropListConfig = Array<keyof CSSProperties> | '*';
 export type BreakpointsConfig = { [k in string]: number };
 
 export type MagicValueMethods<K extends MagicPropsConfig> = {

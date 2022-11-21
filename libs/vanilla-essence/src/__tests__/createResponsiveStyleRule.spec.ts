@@ -9,7 +9,7 @@ describe('createResponsiveStyleRule', () => {
       paddingX: ['paddingLeft', 'paddingRight'],
       marginX: ['marginLeft', 'marginRight'],
     },
-    remPropList: ['fontSize', 'letterSpacing', 'lineHeight'],
+    remPropList: '*',
     breakpoints: {
       sm: 640,
       md: 768,
@@ -68,7 +68,7 @@ describe('createResponsiveStyleRule', () => {
         '@media': {
           '(min-width: 640px)': {
             fontSize: '1.25rem',
-            marginTop: 20,
+            marginTop: '1.25rem',
             marginLeft: 40,
             marginRight: 40,
             marginBottom: ['20vh', 40],
@@ -105,7 +105,7 @@ describe('createResponsiveStyleRule', () => {
         '@media': {
           '(min-width: 640px)': {
             fontSize: '1.25rem',
-            marginTop: 20,
+            marginTop: '1.25rem',
             marginLeft: 40,
             marginRight: 40,
           },
