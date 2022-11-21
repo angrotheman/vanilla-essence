@@ -57,7 +57,11 @@ export const convertSingleStyleRule = <
       (typeof val === 'number' || typeof val === 'string') &&
       magicValueMethods[prop]
     ) {
-      const convertedMagicValues = magicValueMethods[prop](val);
+      const convertedMagicValues = convertSingleStyleRule({
+        styleRule: magicValueMethods[prop](val) as CustomStyleRule,
+        config,
+        magicValueMethods,
+      });
 
       delete convertedStyleRule[prop];
       convertedStyleRule = {

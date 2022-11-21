@@ -38,8 +38,8 @@ describe('createResponsiveStyleRule', () => {
     ).toStrictEqual([
       {
         fontSize: '1rem',
-        marginLeft: 20,
-        marginRight: 20,
+        marginLeft: '1.25rem',
+        marginRight: '1.25rem',
       },
     ]);
   });
@@ -61,16 +61,16 @@ describe('createResponsiveStyleRule', () => {
     ).toStrictEqual([
       {
         fontSize: '1rem',
-        marginLeft: 20,
-        marginRight: 20,
+        marginLeft: '1.25rem',
+        marginRight: '1.25rem',
       },
       {
         '@media': {
           '(min-width: 640px)': {
             fontSize: '1.25rem',
             marginTop: '1.25rem',
-            marginLeft: 40,
-            marginRight: 40,
+            marginLeft: '2.5rem',
+            marginRight: '2.5rem',
             marginBottom: ['20vh', 40],
           },
         },
@@ -98,16 +98,16 @@ describe('createResponsiveStyleRule', () => {
     ).toStrictEqual([
       {
         fontSize: '1rem',
-        marginLeft: 20,
-        marginRight: 20,
+        marginLeft: '1.25rem',
+        marginRight: '1.25rem',
       },
       {
         '@media': {
           '(min-width: 640px)': {
             fontSize: '1.25rem',
             marginTop: '1.25rem',
-            marginLeft: 40,
-            marginRight: 40,
+            marginLeft: '2.5rem',
+            marginRight: '2.5rem',
           },
         },
       },
@@ -115,8 +115,8 @@ describe('createResponsiveStyleRule', () => {
         '@media': {
           '(min-width: 768px)': {
             fontSize: '1.5rem',
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingLeft: '1.25rem',
+            paddingRight: '1.25rem',
           },
         },
       },
