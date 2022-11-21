@@ -24,7 +24,7 @@ export const { style, responsiveStyle } = initStyle(defaultConfig);
 
 ## Key Differences to Vanilla Extract are:
 
-- **(currently this is not finally implemented!)** A CSS class is created for each CSS property. This way the last class always wins and it is extremely easy to override stylings. Also, the size of the bundled file is smaller because there are no repetitions. _(currently this is not available for pseudo-classes)_.
+- **(currently this is not finally implemented!)** **Atomic CSS:** A CSS class is created for each CSS property. This way the last class always wins and it is extremely easy to override stylings. Also, the size of the bundled file is smaller because there are no repetitions. _(currently this is not available for pseudo-classes)_.
 
 ```js
 const bgRed = style({
@@ -44,7 +44,7 @@ const combinedClass2 = style([
 ]);
 ```
 
-- It automatically converts a numeric value to a rem value. By default enabled for: `fontSize, letterSpacing, lineHeight`.
+- **Rem Conversion:** It automatically converts a numeric value to a rem value. By default enabled for: `fontSize, letterSpacing, lineHeight`.
 
   - **(You can customize these settings in `config.remPropList`).**
 
