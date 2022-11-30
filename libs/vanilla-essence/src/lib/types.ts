@@ -31,9 +31,17 @@ export type MagicValueMethods<K extends MagicPropsConfig> = {
   [k in keyof K]: (value: number | string) => StyleRule;
 };
 
+export type DarkModeConfig = boolean;
+
+export type ColorsConfig = {
+  [k in string]: string;
+};
+
 export interface InitStyleConfig {
   useAtomicCSS?: boolean;
+  darkMode?: DarkModeConfig;
   magicProps?: MagicPropsConfig;
   remPropList?: RemPropListConfig;
   breakpoints?: BreakpointsConfig;
+  colors?: ColorsConfig;
 }

@@ -1,8 +1,8 @@
 import { getOnlyStrings } from '../lib/utils/filters/getOnlyStrings';
-import { CSSProp } from '../lib/utils/types';
+import { CustomStyleRule } from '../lib/types';
 import { getOnlyProps } from '../lib/utils/filters/getOnlyProps';
 
-type ClassesArray = Array<string | CSSProp>;
+type ClassesArray = Array<string | CustomStyleRule>;
 
 const classes1: ClassesArray = ['a', { prop: 'background', value: 'red' }];
 
