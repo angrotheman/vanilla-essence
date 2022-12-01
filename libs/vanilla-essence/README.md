@@ -8,22 +8,24 @@ If you currently use [Vanilla Extract](https://vanilla-extract.style/), you can 
 
 ## Configure Vanilla Essence:
 
-To use `Vanilla Essence`, you must create a configure file and call the `initStyle` method, which then provides a perfectly typed custom `style` and `responsiveStyle` method.
-You can place the file anywhere you want.
+To use `Vanilla Essence`, you must create a config-file and call the `initStyle` method. This file must be a `.css.ts` file, otherwise it will not work. This method then provides you with a perfectly typed custom `style` and `responsiveStyle` method.
+You can place the file anywhere you want. A good option is to create a file named `style.config.css.ts` in the globals `style` folder of your application.
 
-The easiest way to do this looks like this:
+The easiest way to set everything up is as follows:
 
 ```js
 import { initStyle } from '@antoniogross/vanilla-essence';
 import defaultConfig from '@antoniogross/vanilla-essence/src/config/default';
 
-export const { style, responsiveStyle } = initStyle(defaultConfig);
+export const { style, responsiveStyle, themeSprinkles } =
+  initStyle(defaultConfig);
 ```
 
 ---
 
-## Key Differences to Vanilla Extract are:
+## Key Differences to Vanilla Extract´s `style` API are:
 
+<!--
 - **(currently this is not finally implemented!)** **Atomic CSS:** A CSS class is created for each CSS property. This way the last class always wins and it is extremely easy to override stylings. Also, the size of the bundled file is smaller because there are no repetitions. _(currently this is not available for pseudo-classes)_.
 
 ```js
@@ -43,6 +45,7 @@ const combinedClass2 = style([
   },
 ]);
 ```
+-->
 
 - **Rem Conversion:** It automatically converts a numeric value to a rem value. By default enabled for: `fontSize, letterSpacing, lineHeight`.
 
@@ -75,6 +78,7 @@ const responsiveClass = responsiveStyle({
 });
 ```
 
+<!--
 - **`createUniqueIdentifier` method:** This method is useful when you need to use `globalStyle` to style a child element of a css class.
 
 ```js
@@ -85,6 +89,22 @@ const b = globalStyle(`${identifier} svg`, {
   width: '100%',
 });
 ```
+-->
+
+---
+
+## `themeSprinkles` API:
+
+You can define your colors in the same way as in [Tailwind CSS](https://tailwindcss.com/docs/responsive-design). The colors must be hex values. These values are then automatically converted to RGB values, which gives you the possibility to change the opacity when using these colors. Defined colors will be available as `backgroundColor`, `color` and `borderColor`.
+
+```js
+const themeStyle = themeSprinkles({
+  backgroundColor: 'gray-700',
+  backgroundColorOpacity: 50,
+});
+```
+
+- **(You can customize these settings in `config.colors` and `config.opacities`).**
 
 ---
 
