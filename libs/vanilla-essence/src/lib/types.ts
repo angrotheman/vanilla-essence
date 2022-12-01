@@ -33,6 +33,14 @@ export type MagicValueMethods<K extends MagicPropsConfig> = {
 
 export type DarkModeConfig = boolean;
 
+export type FontFamilyConfig = {
+  [k in string]: string;
+};
+
+export type FontWeightConfig = {
+  [k in string]: number | string;
+};
+
 export type OpacityConfig = {
   [k in string]: number;
 };
@@ -52,4 +60,6 @@ export interface InitStyleConfig {
   breakpoints?: BreakpointsConfig;
   colors?: ColorsConfig;
   opacities?: OpacityConfig;
+  fontFamilies?: FontFamilyConfig;
+  fontWeights?: FontWeightConfig;
 }

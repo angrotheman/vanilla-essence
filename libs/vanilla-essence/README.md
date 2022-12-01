@@ -95,7 +95,7 @@ const b = globalStyle(`${identifier} svg`, {
 
 ## `themeSprinkles` API:
 
-You can define your colors in the same way as in [Tailwind CSS](https://tailwindcss.com/docs/responsive-design). The colors must be hex values. These values are then automatically converted to RGB values, which gives you the possibility to change the opacity when using these colors. Defined colors will be available as `backgroundColor`, `color` and `borderColor`.
+You can define your colors and font-family/font-weight settings in the same way as in [Tailwind CSS](https://tailwindcss.com/). The colors must be defined as hex values. These values are then automatically converted to RGB values, which gives you the possibility to change the opacity when using these colors. Defined colors will be available as `backgroundColor`, `color` and `borderColor`.
 
 ```js
 const themeStyle = themeSprinkles({
