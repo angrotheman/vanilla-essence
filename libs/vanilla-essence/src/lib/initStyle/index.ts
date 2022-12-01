@@ -7,6 +7,7 @@ import { createMagicValueCSSClasses } from '../utils/createMagicValueCSSClasses'
 import { createComplexStyleRule } from '../createComplexStyleRule';
 import { style as vanillaStyle } from '@vanilla-extract/css';
 import { createResponsiveStyleRule } from '../createResponsiveStyleRule';
+import { createThemeSprinkles } from '../sprinkles/createThemeSprinkles';
 
 export const initStyle = <C extends InitStyleConfig>(config: C) => {
   type StyleProps = CustomComplexStyle<C>;
@@ -40,8 +41,11 @@ export const initStyle = <C extends InitStyleConfig>(config: C) => {
       })
     );
 
+  const sprinkles = createThemeSprinkles({ config });
+
   return {
     style: completeStyle,
     responsiveStyle: completeResponsiveStyle,
+    themeSprinkles: sprinkles,
   };
 };

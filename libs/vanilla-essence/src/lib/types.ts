@@ -25,7 +25,7 @@ export type CustomResponsiveStyle<C extends InitStyleConfig> = {
 
 export type MagicPropsConfig = { [k in string]: Array<keyof CSSProperties> };
 export type RemPropListConfig = Array<keyof CSSProperties> | '*';
-export type BreakpointsConfig = { [k in string]: number };
+export type BreakpointsConfig = Readonly<{ [k in string]: number }>;
 
 export type MagicValueMethods<K extends MagicPropsConfig> = {
   [k in keyof K]: (value: number | string) => StyleRule;
@@ -33,6 +33,13 @@ export type MagicValueMethods<K extends MagicPropsConfig> = {
 
 export type DarkModeConfig = boolean;
 
+export type OpacityConfig = {
+  [k in string]: number;
+};
+
+/**
+ * all colors need to be hex values
+ */
 export type ColorsConfig = {
   [k in string]: string;
 };
@@ -44,4 +51,5 @@ export interface InitStyleConfig {
   remPropList?: RemPropListConfig;
   breakpoints?: BreakpointsConfig;
   colors?: ColorsConfig;
+  opacities?: OpacityConfig;
 }
