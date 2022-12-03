@@ -8,11 +8,39 @@ export const createThemeSprinkles = <C extends InitStyleConfig>({
 }: {
   config: C;
 }) => {
+  const colorProperties = createColorProperties({ config });
+  const fontProperties = createFontProperties({ config });
+
   return createSprinkles(
-    defineProperties(createColorProperties({ config })),
-    defineProperties(createFontProperties({ config }))
+    defineProperties(colorProperties),
+    defineProperties(fontProperties)
   );
 };
 
-// font families
-//
+/*
+const testSprinkles = createThemeSprinkles({
+  config: {
+    fontFamilies: {
+      sans: 'sans-serif',
+    },
+    fontWeights: {
+      bold: 500,
+    },
+    colors: {
+      red: '#ff0000',
+    },
+    opacities: {
+      10: 0.1,
+      30: 0.3,
+    },
+  },
+});
+
+const foo = testSprinkles({
+  backgroundColor: { default: 'red', hover: 'red' },
+  backgroundColorOpacity: { default: 10, hover: 30 },
+  borderColor: 'red',
+  fontFamily: 'sans',
+  fontWeight: 'bold',
+});
+*/

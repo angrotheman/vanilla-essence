@@ -6,33 +6,36 @@ export const createColorProperties = <C extends InitStyleConfig>({
 }: {
   config: C;
 }) => {
-  // config.colors
-  // config.opacities
   // config.darkMode
 
+  const properties = {
+    ...generateColorValues<'backgroundColor', C>({
+      property: 'backgroundColor',
+      config,
+    }),
+    ...generateColorValues<'borderColor', C>({
+      property: 'borderColor',
+      config,
+    }),
+    ...generateColorValues<'color', C>({
+      property: 'color',
+      config,
+    }),
+  };
+
+  const conditions = {
+    default: {},
+    hover: { selector: '&:hover' },
+    // onDark: { selector: onDark },
+    // onDarkHover: { selector: `${darkThemeClass} &:hover` },
+  };
+
+  const defaultCondition = 'default' as const;
+
   return {
-    properties: Object.assign(
-      {},
-      generateColorValues<'backgroundColor', C>({
-        config,
-        property: 'backgroundColor',
-      }),
-      generateColorValues<'borderColor', C>({
-        config,
-        property: 'borderColor',
-      }),
-      generateColorValues<'color', C>({
-        config,
-        property: 'color',
-      })
-    ),
-    conditions: {
-      default: {},
-      hover: { selector: '&:hover' },
-      // onDark: { selector: onDark },
-      // onDarkHover: { selector: `${darkThemeClass} &:hover` },
-    },
-    defaultCondition: 'default',
+    properties,
+    conditions,
+    defaultCondition,
   };
 };
 
