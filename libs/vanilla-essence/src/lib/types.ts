@@ -31,7 +31,23 @@ export type MagicValueMethods<K extends MagicPropsConfig> = {
   [k in keyof K]: (value: number | string) => StyleRule;
 };
 
-export type DarkModeConfig = boolean;
+export type DarkModeMediaConfig = {
+  type: 'media';
+};
+
+export type DarkModeClassConfig = {
+  type: 'class';
+  className: string;
+};
+
+export type DarkModeDisabledConfig = {
+  type: 'disabled';
+};
+
+export type DarkModeConfig =
+  | DarkModeClassConfig
+  | DarkModeMediaConfig
+  | DarkModeDisabledConfig;
 
 export type FontFamilyConfig = {
   [k in string]: string;
@@ -53,7 +69,7 @@ export type ColorsConfig = {
 };
 
 export interface InitStyleConfig {
-  useAtomicCSS?: boolean;
+  // useAtomicCSS?: boolean;
   darkMode?: DarkModeConfig;
   magicProps?: MagicPropsConfig;
   remPropList?: RemPropListConfig;

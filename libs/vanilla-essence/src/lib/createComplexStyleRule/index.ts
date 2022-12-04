@@ -24,9 +24,11 @@ export const createComplexStyleRule = <
     convertSingleStyleRule({ styleRule, config, magicValueMethods })
   );
 
+  /*
   if (config.useAtomicCSS) {
     return ['atomic-will-come'];
   }
+  */
 
   return [...classNames, ...convertedStyleRules];
 };

@@ -1,6 +1,7 @@
 import { defineConfig } from '../lib/defineConfig';
 
 const defaultConfig = defineConfig({
+  darkMode: { type: 'media' },
   breakpoints: {
     sm: 640,
     md: 768,

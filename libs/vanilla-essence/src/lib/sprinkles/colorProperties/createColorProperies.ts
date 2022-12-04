@@ -1,4 +1,5 @@
 import { InitStyleConfig } from '../../types';
+import { createConditions } from './createConditions';
 import { generateColorValues } from './generateColorValues';
 
 export const createColorProperties = <C extends InitStyleConfig>({
@@ -6,8 +7,6 @@ export const createColorProperties = <C extends InitStyleConfig>({
 }: {
   config: C;
 }) => {
-  // config.darkMode
-
   const properties = {
     ...generateColorValues<'backgroundColor', C>({
       property: 'backgroundColor',
@@ -23,12 +22,7 @@ export const createColorProperties = <C extends InitStyleConfig>({
     }),
   };
 
-  const conditions = {
-    default: {},
-    hover: { selector: '&:hover' },
-    // onDark: { selector: onDark },
-    // onDarkHover: { selector: `${darkThemeClass} &:hover` },
-  };
+  const conditions = createConditions(config.darkMode as C['darkMode']);
 
   const defaultCondition = 'default' as const;
 
