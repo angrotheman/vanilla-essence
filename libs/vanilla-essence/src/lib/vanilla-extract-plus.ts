@@ -6,7 +6,7 @@ export { defineConfig } from './defineConfig';
 
 export {
   /**
-   * @description `style` method without any modification
+   * @description standard `style` method without any modification
    */
   style as vanillaStyle,
   createVar,
@@ -24,3 +24,10 @@ export {
   createGlobalThemeContract,
   styleVariants,
 } from '@vanilla-extract/css';
+
+export {
+  createSprinkles,
+  defineProperties,
+  createNormalizeValueFn,
+  createMapValueFn,
+} from '@vanilla-extract/sprinkles';
