@@ -11,9 +11,15 @@ export type MagicPropsRule<C extends MagicPropsConfig> = {
 };
 
 export type CustomStyleRule = Record<string, unknown>;
+
+type SingleComplexStyleRule<C extends InitStyleConfig> = StyleRule &
+  MagicPropsRule<C['magicProps']> & {
+    '@responsive'?: Omit<CustomResponsiveStyle<C>, 'default'>;
+  };
+
 export type CustomComplexStyle<C extends InitStyleConfig> =
-  | (StyleRule & MagicPropsRule<C['magicProps']>)
-  | Array<(StyleRule & MagicPropsRule<C['magicProps']>) | ClassNames>;
+  | SingleComplexStyleRule<C>
+  | Array<SingleComplexStyleRule<C> | ClassNames>;
 
 export type CustomResponsiveStyle<C extends InitStyleConfig> = {
   default?: CustomComplexStyle<C>;

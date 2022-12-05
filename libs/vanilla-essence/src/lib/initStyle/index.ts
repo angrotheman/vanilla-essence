@@ -1,17 +1,11 @@
-import type {
-  CustomComplexStyle,
-  CustomResponsiveStyle,
-  InitStyleConfig,
-} from '../types';
+import type { InitStyleConfig } from '../types';
 import { createMagicValueCSSClasses } from '../utils/createMagicValueCSSClasses';
-import { createComplexStyleRule } from '../createComplexStyleRule';
-import { style as vanillaStyle } from '@vanilla-extract/css';
-import { createResponsiveStyleRule } from '../createResponsiveStyleRule';
 import { createThemeSprinkles } from '../sprinkles/createThemeSprinkles';
+import { createCompleteStyle } from './createCompleteStyle';
+// import { createCompleteResponsiveStyle } from './createCompleteResponsiveStyle';
 
 export const initStyle = <C extends InitStyleConfig>(config: C) => {
-  type StyleProps = CustomComplexStyle<C>;
-  type ResponsiveStyleProps = CustomResponsiveStyle<C>;
+  // type ResponsiveStyleProps = CustomResponsiveStyle<C>;
 
   // ------
 
@@ -21,31 +15,20 @@ export const initStyle = <C extends InitStyleConfig>(config: C) => {
 
   // ------
 
-  const completeStyle = (givenStyle: StyleProps) =>
-    vanillaStyle(
-      createComplexStyleRule({
-        givenStyle,
-        config,
-        magicValueMethods,
-      })
-    );
+  const completeStyle = createCompleteStyle({ config, magicValueMethods });
 
-  const completeResponsiveStyle = (
-    givenResponsiveStyle: ResponsiveStyleProps
-  ) =>
-    vanillaStyle(
-      createResponsiveStyleRule({
-        givenResponsiveStyle,
-        config,
-        magicValueMethods,
-      })
-    );
+  /*
+  const completeResponsiveStyle = createCompleteResponsiveStyle({
+    config,
+    magicValueMethods,
+  });
+  */
 
   const sprinkles = createThemeSprinkles({ config });
 
   return {
     style: completeStyle,
-    responsiveStyle: completeResponsiveStyle,
+    // responsiveStyle: completeResponsiveStyle,
     themeSprinkles: sprinkles,
   };
 };

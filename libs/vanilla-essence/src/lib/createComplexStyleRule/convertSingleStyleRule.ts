@@ -1,6 +1,11 @@
-import { CustomStyleRule, InitStyleConfig } from '../types';
+import {
+  CustomResponsiveStyle,
+  CustomStyleRule,
+  InitStyleConfig,
+} from '../types';
 import { CSSProperties, StyleRule } from '@vanilla-extract/css';
 import { convertPxToRem } from '../utils/transformValues/convertPxToRem';
+import { createResponsiveStyleRule } from '../createResponsiveStyleRule/index';
 
 const forbiddenRemValues: Array<keyof CSSProperties> = [
   'fontWeight',
@@ -68,6 +73,30 @@ export const convertSingleStyleRule = <
         ...convertedStyleRule,
         ...convertedMagicValues,
       };
+      return;
+    }
+
+    // responsive converter
+    if (prop === '@responsive') {
+      const convertedResponsiveRule = createResponsiveStyleRule({
+        config,
+        magicValueMethods,
+        givenResponsiveStyle: convertedVal as CustomResponsiveStyle<C>,
+      });
+
+      const simplifiedResponsiveRule = Object.assign(
+        {},
+        ...convertedResponsiveRule.map((i) => i['@media'])
+      );
+
+      delete convertedStyleRule['@responsive'];
+      convertedStyleRule = {
+        ...convertedStyleRule,
+        '@media': {
+          ...simplifiedResponsiveRule,
+        },
+      };
+
       return;
     }
 

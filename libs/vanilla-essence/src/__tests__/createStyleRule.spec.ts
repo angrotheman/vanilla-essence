@@ -9,6 +9,10 @@ describe('createStyleRule', () => {
       paddingX: ['paddingLeft', 'paddingRight'],
     },
     remPropList: ['fontSize'],
+    breakpoints: {
+      sm: 640,
+      md: 768,
+    },
   });
 
   const styleTemplate = (styleRule: CustomComplexStyle<typeof styleConfig>) =>
@@ -47,6 +51,74 @@ describe('createStyleRule', () => {
       { fontSize: ['14vmin', 12], ':hover': { fontSize: '1.5rem' } },
     ]);
   });
-});
 
-// convert singleStyleRuleConverter method -> and check if value is a object -> run singleStyleRuleConverter for value
+  test('styleRule can handle responsive styles', () => {
+    expect(
+      styleTemplate({
+        background: 'red',
+        fontSize: 12,
+        paddingX: 12,
+        '@responsive': {
+          sm: {
+            background: 'green',
+            fontSize: 16,
+            paddingX: 14,
+          },
+        },
+      })
+    ).toStrictEqual([
+      {
+        background: 'red',
+        fontSize: '0.75rem',
+        paddingLeft: 12,
+        paddingRight: 12,
+        '@media': {
+          '(min-width: 640px)': {
+            background: 'green',
+            fontSize: '1rem',
+            paddingLeft: 14,
+            paddingRight: 14,
+          },
+        },
+      },
+    ]);
+  });
+
+  test('styleRule can handle multiple responsive styles', () => {
+    expect(
+      styleTemplate({
+        background: 'red',
+        fontSize: 12,
+        paddingX: 12,
+        '@responsive': {
+          sm: {
+            background: 'green',
+            fontSize: 16,
+            paddingX: 14,
+          },
+          md: {
+            background: 'yellow',
+          },
+        },
+      })
+    ).toStrictEqual([
+      {
+        background: 'red',
+        fontSize: '0.75rem',
+        paddingLeft: 12,
+        paddingRight: 12,
+        '@media': {
+          '(min-width: 640px)': {
+            background: 'green',
+            fontSize: '1rem',
+            paddingLeft: 14,
+            paddingRight: 14,
+          },
+          '(min-width: 768px)': {
+            background: 'yellow',
+          },
+        },
+      },
+    ]);
+  });
+});
