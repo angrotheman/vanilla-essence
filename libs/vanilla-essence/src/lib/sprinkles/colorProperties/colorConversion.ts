@@ -1,5 +1,5 @@
 import hexRgb from 'hex-rgb';
-import { fallbackVar, createVar, StyleRule } from '@vanilla-extract/css';
+import { fallbackVar, createVar } from '@vanilla-extract/css';
 import { ColorsConfig, OpacityConfig } from '../../types';
 
 type AlphaVar = ReturnType<typeof createVar>;
