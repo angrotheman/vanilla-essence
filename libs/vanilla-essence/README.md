@@ -1,15 +1,11 @@
 # Vanilla Essence
 
-This library is based on [Vanilla Extract](https://vanilla-extract.style/), and adds key features of [Tailwind CSS](https://tailwindcss.com/) and [Stylex](https://www.youtube.com/watch?v=ur-sGzUWId4).
+Vanilla Essence is a library that builds upon [Vanilla Extract](https://vanilla-extract.style/) and includes key features of [Tailwind CSS](https://tailwindcss.com/) and [Stylex](https://www.youtube.com/watch?v=ur-sGzUWId4). If you currently use Vanilla Extract, you can easily switch to Vanilla Essence by updating your library and imports.
 
-First read the documentation of [Vanilla Extract](https://vanilla-extract.style/). It works exactly the same, only now with a few more advantages.
+## Getting Started:
 
-If you currently use [Vanilla Extract](https://vanilla-extract.style/), you can simply swap the library, configure it and update your imports and everything should run fine.
-
-## Configure Vanilla Essence:
-
-To use `Vanilla Essence`, you must create a config-file and call the `initStyle` method. This file must be a `.css.ts` file, otherwise it will not work. This method then provides you with a perfectly typed custom `style` and `responsiveStyle` method.
-You can place the file anywhere you want. A good option is to create a file named `style.config.css.ts` in the globals `style` folder of your application.
+To use `Vanilla Essence`, you must create a config-file and call the `initStyle` method. This method provides you with a typed modified `style` and `themeSprinkles` method.
+You can place the file anywhere you want, but a good option is to create a file named `style.config.css.ts` in the globals `style` folder of your application. This file must be a `.css.ts` file, otherwise it will not work.
 
 The easiest way to set everything up is as follows:
 
@@ -17,13 +13,12 @@ The easiest way to set everything up is as follows:
 import { initStyle } from '@antoniogross/vanilla-essence';
 import defaultConfig from '@antoniogross/vanilla-essence/src/config/default';
 
-export const { style, responsiveStyle, themeSprinkles } =
-  initStyle(defaultConfig);
+export const { style, themeSprinkles } = initStyle(defaultConfig);
 ```
 
 ---
 
-## Key Differences to Vanilla Extract´s `style` API are:
+## Vanilla Essence includes several key differences from Vanilla Extract's style API:
 
 <!--
 - **(currently this is not finally implemented!)** **Atomic CSS:** A CSS class is created for each CSS property. This way the last class always wins and it is extremely easy to override stylings. Also, the size of the bundled file is smaller because there are no repetitions. _(currently this is not available for pseudo-classes)_.
@@ -47,33 +42,28 @@ const combinedClass2 = style([
 ```
 -->
 
-- **Rem Conversion:** It automatically converts a numeric value to a rem value. By default enabled for: `fontSize, letterSpacing, lineHeight`.
+- **Rem Conversion:** This automatically converts numeric values to rem values for properties such as fontSize, letterSpacing, and lineHeight. _These settings can be customized in `config.remPropList` and it can be enabled for any value using "\*"_.
 
-  - **(You can customize these settings in `config.remPropList`). You can enable the conversion for any valiue with '\*'.**
+- **Magic Values:** This adds custom css properties such as `paddingX`, `paddingY`, `marginX`, and `marginY`. You may already know this from the sprinkles API. There it is called `shorthands`. _These settings can be customized in `config.magicProps`_.
 
-- **Magic Values:** It adds _"Magic Values"_. You may already know this from the sprinkles API. There it is called `shorthands`. By default available is: `paddingX, paddingY, marginX, marginY`. You can just use it inside the `style` API.
-
-  - **(You can customize these settings in `config.magicProps`).**
-
-- **`responsiveStyle` API:** This allows for extremely fast implementation of Responsive Styling. By default it uses the same breakpoints as you know from [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
-  - **(You can customize these settings in `config.breakpoints`).**
+- **`responsive` API:** This allows for easy implementation of responsive styling using the same breakpoints as [Tailwind CSS](https://tailwindcss.com/docs/responsive-design). _These settings can be customized in `config.breakpoints`_.
 
 ```js
-const responsiveClass = responsiveStyle({
-  default: {
-    backgroundColor: 'grey',
-    paddingX: 12,
-  },
-  sm: {
-    backgroundColor: 'red',
-  },
-  md: {
-    backgroundColor: 'blue',
-    paddingX: 16,
-  },
-  lg: {
-    backgroundColor: 'green',
-    paddingX: 20,
+const responsiveClass = style({
+  backgroundColor: 'grey',
+  paddingX: 12,
+  '@responsive': {
+    sm: {
+      backgroundColor: 'red',
+    },
+    md: {
+      backgroundColor: 'blue',
+      paddingX: 16,
+    },
+    lg: {
+      backgroundColor: 'green',
+      paddingX: 20,
+    },
   },
 });
 ```
@@ -95,35 +85,42 @@ const b = globalStyle(`${identifier} svg`, {
 
 ## `themeSprinkles` API:
 
-You can define your colors and font-family/font-weight settings in the same way as in [Tailwind CSS](https://tailwindcss.com/). The colors must be defined as hex values. These values are then automatically converted to RGB values, which gives you the possibility to change the opacity when using these colors. Defined colors will be available as `backgroundColor`, `color` and `borderColor`.
+The `themeSprinkles` API allows you to define your own colors and font-family/font-weight settings using the same syntax as in Tailwind CSS. The colors must be specified using hexadecimal values, which will be automatically converted to RGB values. This allows you to adjust the opacity when using these colors in your design. The defined colors will be available as `backgroundColor`, `color`, and `borderColor`. _These settings can be customized in `config.colors`, `config.opacities`, `config.fontFamilies` and `config.fontWeights`)._
+
+Dark mode is enabled by default based on the operating system preference, but you can also use a custom class to enable it. Additionally, dark mode can be disabled by setting the type to `disabled`.
 
 ```js
 const themeStyle = themeSprinkles({
   backgroundColor: 'gray-700',
-  backgroundColorOpacity: 50,
+  backgroundColorOpacity: {
+    default: 50,
+    darkMode: 25,
+  },
 });
 ```
 
-- **(You can customize these settings in `config.colors` and `config.opacities`).**
+The config.opacities, config.fontFamilies, and config.fontWeights settings determine the available options for colors, font families, and font weights in your design. Dark mode settings can be customized in config.darkmode.
 
 ---
 
 ### Preflight CSS / Reset CSS
 
-It is now very easy to reset the CSS. Just import `'@antoniogross/vanilla-essence/src/css/preflight.css'` and everything is done. The file is mostly based on [Tailwind's preflight file](https://unpkg.com/tailwindcss@3.2.4/src/css/preflight.css).
+To reset your CSS, simply import the `@antoniogross/vanilla-essence/src/css/preflight.css` file. This file is based on [Tailwind's preflight file](https://unpkg.com/tailwindcss@3.2.4/src/css/preflight.css).
 
 ---
 
 ### Known, currently necessary workarounds
 
-- Sometimes it can help to create an `initResponsiveStyle` if the media query order of the CSS output is not correct. This style should be placed at the top of the application and does not need to be used anywhere. Especially when using `atomicCss`
+- If you are having issues with the media query order in the CSS output, you can try creating an `initResponsiveStyle` at the top of your application. This style does not need to be used anywhere, and can help fix incorrect media query order. Here is an example of how to create an `initResponsiveStyle`:
 
 ```js
-const initResponsiveStyle = responsiveStyle({
-  sm: { display: 'block' },
-  md: { display: 'block' },
-  lg: { display: 'block' },
-  xl: { display: 'block' },
-  '2xl': { display: 'block' },
+const initResponsiveStyle = style({
+  '@responsive': {
+    sm: { display: 'block' },
+    md: { display: 'block' },
+    lg: { display: 'block' },
+    xl: { display: 'block' },
+    '2xl': { display: 'block' },
+  },
 });
 ```
