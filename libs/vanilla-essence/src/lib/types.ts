@@ -71,7 +71,7 @@ export type OpacityConfig = {
  * all colors need to be hex values
  */
 export type ColorsConfig = {
-  [k in string]: string;
+  [k in string]: `#${string}`;
 };
 
 export interface InitStyleConfig {
