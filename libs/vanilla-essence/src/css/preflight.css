@@ -19,6 +19,7 @@
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use `sans` font-family by default.
+5. Prevent Safari from making variable fonts italic by default.
 */
 
 html {
@@ -28,6 +29,7 @@ html {
   tab-size: 4; /* 3 */
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; /* 4 */
+  font-variation-settings: 'slnt' 0; /* 5 */
 }
 
 /*
