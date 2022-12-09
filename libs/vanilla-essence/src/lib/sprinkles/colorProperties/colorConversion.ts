@@ -1,6 +1,7 @@
 import hexRgb from 'hex-rgb';
 import { fallbackVar, createVar } from '@vanilla-extract/css';
 import { ColorsConfig, OpacityConfig } from '../../types';
+import { FlatColorKeys, flatColorsSettings } from './flatColorsSettings';
 
 type AlphaVar = ReturnType<typeof createVar>;
 
@@ -11,12 +12,12 @@ export const convertToCssColors = <CC extends ColorsConfig>({
   colors: CC;
   alphaVar?: AlphaVar;
 }): {
-  [k in keyof CC]: `rgb(${string})`;
+  [k in FlatColorKeys<CC>]: `rgb(${string})`;
 } =>
   Object.assign(
     {},
-    ...Object.entries(colors).map(([key, color]) => {
-      const { red, green, blue, alpha } = hexRgb(color);
+    ...Object.entries(flatColorsSettings(colors)).map(([key, color]) => {
+      const { red, green, blue, alpha } = hexRgb(color as string);
 
       const convertedColor = `rgb(${red} ${green} ${blue} / ${
         alphaVar ? fallbackVar(alphaVar, `${alpha}`) : alpha
@@ -86,6 +87,10 @@ export const generateOpacityValues = <
   const testColors = convertToCssColors({
     colors: {
       red: '#ff0000',
+      blue: {
+        500: '#sdfd',
+        DEFAULT: '#sdfjlkhdfs',
+      },
     },
     alphaVar: 'var(--alpha-var)',
   });

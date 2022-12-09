@@ -85,7 +85,7 @@ const b = globalStyle(`${identifier} svg`, {
 
 ## `themeSprinkles` API:
 
-The `themeSprinkles` API allows you to define your own colors and font-family/font-weight settings using the same syntax as in Tailwind CSS. The colors must be specified using hexadecimal values, which will be automatically converted to RGB values. This allows you to adjust the opacity when using these colors in your design. The defined colors will be available as `backgroundColor`, `color`, and `borderColor`. _These settings can be customized in `config.colors`, `config.opacities`, `config.fontFamilies` and `config.fontWeights`)._
+The `themeSprinkles` API allows you to define your own colors and font-family/font-weight settings using the same syntax as in Tailwind CSS. The colors must be specified using hexadecimal values, which will be automatically converted to RGB values. This allows you to adjust the opacity when using these colors in your design. The defined colors will be available as `backgroundColor`, `color`, and `borderColor`. _These settings can be customized in `config.colors`, `config.opacities`, `config.fontFamilies` and `config.fontWeights`)._ Colors can be configured exactly as in [Tailwind CSS](https://tailwindcss.com/docs/customizing-colors#using-custom-colors). Also the Color object syntax with a `DEFAULT` key will work.
 
 Dark mode is enabled by default based on the operating system preference, but you can also use a custom class to enable it. Additionally, dark mode can be disabled by setting the type to `disabled`.
 

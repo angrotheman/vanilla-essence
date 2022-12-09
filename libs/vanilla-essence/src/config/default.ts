@@ -33,12 +33,20 @@ const defaultConfig = defineConfig({
     black: 900,
   },
   colors: {
-    'blue-50': '#eff6ff',
-    'blue-100': '#dbeafe',
-    'blue-200': '#bfdbfe',
-    'gray-700': '#374151',
-    'gray-800': '#1f2937',
-    'gray-900': '#111827',
+    red: '#f00',
+    blue: {
+      50: '#eff6ff',
+      100: '#dbeafe',
+      200: '#bfdbfe',
+      700: '#374151',
+      800: '#1f2937',
+      900: '#111827',
+    },
+    tahiti: {
+      light: '#67e8f9',
+      DEFAULT: '#06b6d4',
+      dark: '#0e7490',
+    },
   },
   opacities: {
     5: 0.05,

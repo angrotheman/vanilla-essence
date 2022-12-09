@@ -1,12 +1,4 @@
-type HEX_VAL = `#${string}`;
-
-type Props = {
-  [K in string]:
-    | HEX_VAL
-    | {
-        [IK in string]: HEX_VAL;
-      };
-};
+import { ColorsConfig, HEX_VAL } from '../../types';
 
 type KeyOf<P> = Extract<keyof P, string | number>;
 
@@ -15,18 +7,21 @@ type ConvertChildKey<
   P extends string
 > = K extends 'DEFAULT' ? P : `${P}-${K}`;
 
-type FlatColorKeys<P extends Props> = {
-  [K in keyof P]: P[K] extends Props
+export type FlatColorKeys<P extends ColorsConfig> = {
+  [K in keyof P]: P[K] extends ColorsConfig
     ? ConvertChildKey<KeyOf<P[K]>, K extends string ? K : never>
     : K;
 }[keyof P];
 
-type FlatColorsSettingsT<T extends Props> = Record<FlatColorKeys<T>, HEX_VAL>;
 type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
-export const flatColorsSettings = <P extends Props>(
+type FlatColorsSettingsReturn<T extends ColorsConfig> = Expand<
+  Record<FlatColorKeys<T>, HEX_VAL>
+>;
+
+export const flatColorsSettings = <P extends ColorsConfig>(
   colors: P
-): Expand<FlatColorsSettingsT<P>> =>
+): FlatColorsSettingsReturn<P> =>
   Object.assign(
     {},
     ...Object.entries(colors ?? {}).flatMap(([color, values]) =>

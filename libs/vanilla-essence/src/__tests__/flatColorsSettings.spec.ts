@@ -1,4 +1,4 @@
-import { flatColorsSettings } from '../lib/utils/flatColorsSettings';
+import { flatColorsSettings } from '../lib/sprinkles/colorProperties/flatColorsSettings';
 
 describe('flatColorsSettings', () => {
   test('base colors', () => {
