@@ -12,7 +12,7 @@ export const convertToCssColors = <CC extends ColorsConfig>({
   colors: CC;
   alphaVar?: AlphaVar;
 }): {
-  [k in FlatColorKeys<CC>]: `rgb(${string})`;
+  [k in FlatColorKeys<CC> & {}]: `rgb(${string})`;
 } =>
   Object.assign(
     {},
