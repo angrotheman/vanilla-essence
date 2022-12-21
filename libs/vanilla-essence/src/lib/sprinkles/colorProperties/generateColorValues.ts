@@ -1,6 +1,10 @@
 import { createVar, StyleRule } from '@vanilla-extract/css';
 import { InitStyleConfig } from '../../types';
-import { convertToCssColors, generateOpacityValues } from './colorConversion';
+import { convertToRgbColors, generateOpacityValues } from './colorConversion';
+
+const defaultColors = {
+  transparent: 'transparent',
+};
 
 export const generateColorValues = <
   P extends keyof StyleRule,
@@ -14,10 +18,14 @@ export const generateColorValues = <
 }) => {
   const alphaVar = createVar();
 
-  const convertedColors = convertToCssColors<C['colors']>({
-    colors: config.colors,
-    alphaVar,
-  });
+  const convertedColors = {
+    ...defaultColors,
+    ...convertToRgbColors<C['colors']>({
+      colors: config.colors,
+      alphaVar,
+    }),
+  };
+
   const generatedOpacities = generateOpacityValues<
     typeof config['opacities'],
     typeof alphaVar

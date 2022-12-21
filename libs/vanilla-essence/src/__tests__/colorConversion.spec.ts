@@ -1,5 +1,5 @@
 import {
-  convertToCssColors,
+  convertToRgbColors,
   generateOpacityValues,
 } from '../lib/sprinkles/colorProperties/colorConversion';
 
@@ -12,7 +12,7 @@ jest.mock('hex-rgb', () => {
 describe('convertToCssColors', () => {
   test('simple conversion', () => {
     expect(
-      convertToCssColors({
+      convertToRgbColors({
         colors: {
           blue: '#4183c4',
           red: '#ff0000',

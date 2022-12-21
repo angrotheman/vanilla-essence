@@ -5,7 +5,7 @@ import { FlatColorKeys, flatColorsSettings } from './flatColorsSettings';
 
 type AlphaVar = ReturnType<typeof createVar>;
 
-export const convertToCssColors = <CC extends ColorsConfig>({
+export const convertToRgbColors = <CC extends ColorsConfig>({
   colors,
   alphaVar,
 }: {
