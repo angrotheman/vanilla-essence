@@ -1,5 +1,5 @@
 import hexRgb from 'hex-rgb';
-import { fallbackVar, createVar } from '@vanilla-extract/css';
+import { createVar } from '@vanilla-extract/css';
 import { ColorsConfig, OpacityConfig } from '../../types';
 import { FlatColorKeys, flatColorsSettings } from './flatColorsSettings';
 
@@ -20,7 +20,7 @@ export const convertToRgbColors = <CC extends ColorsConfig>({
       const { red, green, blue, alpha } = hexRgb(color as string);
 
       const convertedColor = `rgb(${red} ${green} ${blue} / ${
-        alphaVar ? fallbackVar(alphaVar, `${alpha}`) : alpha
+        alphaVar ? alphaVar : alpha
       })`;
 
       return {

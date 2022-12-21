@@ -20,8 +20,8 @@ describe('convertToCssColors', () => {
         alphaVar: 'var(--alpha-var)',
       })
     ).toStrictEqual({
-      blue: 'rgb(1 1 1 / var(--alpha-var, 1))',
-      red: 'rgb(1 1 1 / var(--alpha-var, 1))',
+      blue: 'rgb(1 1 1 / var(--alpha-var))',
+      red: 'rgb(1 1 1 / var(--alpha-var))',
     });
   });
 });

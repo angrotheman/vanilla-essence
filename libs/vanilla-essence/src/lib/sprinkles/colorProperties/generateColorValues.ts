@@ -34,11 +34,25 @@ export const generateColorValues = <
     alphaVar,
   });
 
+  const finalColors: {
+    [k in keyof typeof convertedColors]: StyleRule;
+  } = Object.assign(
+    {},
+    ...Object.entries(convertedColors).map(([colorKey, colorVal]) => ({
+      [colorKey]: {
+        [property]: colorVal,
+        vars: {
+          [alphaVar]: '1',
+        },
+      } as StyleRule,
+    }))
+  );
+
   const createdConfig = {
-    [property]: convertedColors,
+    [property]: finalColors,
     [`${property}Opacity`]: generatedOpacities,
   } as {
-    [k in P]: typeof convertedColors;
+    [k in P]: typeof finalColors;
   } & {
     [k in `${P}Opacity`]: typeof generatedOpacities;
   };
