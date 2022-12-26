@@ -6,6 +6,8 @@ import {
   StyleWithSelectors,
 } from '@vanilla-extract/css/dist/declarations/src/types';
 
+export type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+
 export type MagicPropsRule<C extends MagicPropsConfig> = {
   [k in keyof C]?: number | string;
 };

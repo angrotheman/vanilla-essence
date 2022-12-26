@@ -103,13 +103,13 @@ The config.opacities, config.fontFamilies, and config.fontWeights settings deter
 
 ---
 
-### Preflight CSS / Reset CSS
+### Preflight CSS / Reset CSS:
 
 To reset your CSS, simply import the `@antoniogross/vanilla-essence/src/css/preflight.css` file. This file is based on [Tailwind's preflight file](https://unpkg.com/tailwindcss@3.2.4/src/css/preflight.css).
 
 ---
 
-### Known, currently necessary workarounds
+### Known, currently necessary workarounds:
 
 - If you are having issues with the media query order in the CSS output, you can try creating an `initResponsiveStyle` at the top of your application. This style does not need to be used anywhere, and can help fix incorrect media query order. Here is an example of how to create an `initResponsiveStyle`:
 
@@ -124,3 +124,22 @@ const initResponsiveStyle = style({
   },
 });
 ```
+
+### useful methods:
+
+This library provides useful methods to improve readability and type safety.
+
+- **`defineSize`**: To create the css functions `clamp`, `min`, `max` or `minmax` more easily.
+
+  ```js
+  import { style } from './style.config.css';
+  import { defineSize } from '@antoniogross/vanilla-essence';
+
+  const title = style({
+    fontSize: defineSize({
+      min: 12,
+      max: 36,
+      ideal: '40vw',
+    }),
+  });
+  ```

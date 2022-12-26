@@ -1,4 +1,4 @@
-import { ColorsConfig, HEX_VAL } from '../../types';
+import { ColorsConfig, Expand, HEX_VAL } from '../../types';
 
 type KeyOf<P> = Extract<keyof P, string | number>;
 
@@ -12,8 +12,6 @@ export type FlatColorKeys<P extends ColorsConfig> = {
     ? ConvertChildKey<KeyOf<P[K]>, K extends string ? K : never>
     : K;
 }[keyof P];
-
-type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
 type FlatColorsSettingsReturn<T extends ColorsConfig> = Expand<
   Record<FlatColorKeys<T>, HEX_VAL>
