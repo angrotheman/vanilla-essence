@@ -3,12 +3,6 @@ import {
   generateOpacityValues,
 } from '../lib/sprinkles/colorProperties/colorConversion';
 
-jest.mock('hex-rgb', () => {
-  return {
-    default: () => ({ red: 1, green: 1, blue: 1, alpha: 1 }),
-  };
-});
-
 describe('convertToCssColors', () => {
   test('simple conversion', () => {
     expect(
@@ -20,8 +14,8 @@ describe('convertToCssColors', () => {
         alphaVar: 'var(--alpha-var)',
       })
     ).toStrictEqual({
-      blue: 'rgb(1 1 1 / var(--alpha-var))',
-      red: 'rgb(1 1 1 / var(--alpha-var))',
+      blue: 'rgb(65 131 196 / var(--alpha-var))',
+      red: 'rgb(255 0 0 / var(--alpha-var))',
     });
   });
 });

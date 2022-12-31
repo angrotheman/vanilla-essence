@@ -5,8 +5,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/angrotheman/vanilla-essence.git"
-  },
-  "dependencies": {
-    "hex-rgb": "^5.0.0"
   }
 }
