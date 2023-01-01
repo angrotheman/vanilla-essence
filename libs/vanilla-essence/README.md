@@ -13,7 +13,7 @@ The easiest way to set everything up is as follows:
 import { initStyle } from '@antoniogross/vanilla-essence';
 import defaultConfig from '@antoniogross/vanilla-essence/src/config/default';
 
-export const { style, themeSprinkles } = initStyle(defaultConfig);
+export const { style, themeSprinkles, pickColor } = initStyle(defaultConfig);
 ```
 
 ---
@@ -101,7 +101,44 @@ const themeStyle = themeSprinkles({
 });
 ```
 
-The config.opacities, config.fontFamilies, and config.fontWeights settings determine the available options for colors, font families, and font weights in your design. Dark mode settings can be customized in config.darkmode.
+The `config.opacities`, `config.fontFamilies`, and `config.fontWeights` settings determine the available options for colors, font families, and font weights in your design. Dark mode settings can be customized in `config.darkmode`.
+
+---
+
+## `pickColor` method:
+
+Sometimes `themesSprinkles` is not enough to define a color at a specific point. This method makes it easy to access color outside of `themeSprinkles`. This can be useful in situations where you need to style a pseudo-element or apply a color in a way that is not covered by the themesSprinkles object.
+
+You can use the pickColor method to access any color available in the themesSprinkles object. Simply pass the name of the color as the first argument, and the desired opacity as the second argument. The method will return a string representing the requested color with the specified opacity applied.
+
+```js
+import { style, pickColor } from './style.config.css';
+
+const block = style({
+  boxShadow: `0 10px 10px ${pickColor('tahiti-light', 50)}`,
+});
+```
+
+---
+
+### useful methods:
+
+This library provides useful methods to improve readability and type safety.
+
+- **`defineSize`**: To create the css functions `clamp`, `min`, `max` or `minmax` more easily.
+
+  ```js
+  import { style } from './style.config.css';
+  import { defineSize } from '@antoniogross/vanilla-essence';
+
+  const title = style({
+    fontSize: defineSize({
+      min: 12,
+      max: 36,
+      ideal: '40vw',
+    }),
+  });
+  ```
 
 ---
 
@@ -126,22 +163,3 @@ const initResponsiveStyle = style({
   },
 });
 ```
-
-### useful methods:
-
-This library provides useful methods to improve readability and type safety.
-
-- **`defineSize`**: To create the css functions `clamp`, `min`, `max` or `minmax` more easily.
-
-  ```js
-  import { style } from './style.config.css';
-  import { defineSize } from '@antoniogross/vanilla-essence';
-
-  const title = style({
-    fontSize: defineSize({
-      min: 12,
-      max: 36,
-      ideal: '40vw',
-    }),
-  });
-  ```
