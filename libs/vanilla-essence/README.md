@@ -13,7 +13,8 @@ The easiest way to set everything up is as follows:
 import { initStyle } from '@antoniogross/vanilla-essence';
 import defaultConfig from '@antoniogross/vanilla-essence/src/config/default';
 
-export const { style, themeSprinkles, pickColor } = initStyle(defaultConfig);
+export const { style, themeSprinkles, pickColor, onDarkMode } =
+  initStyle(defaultConfig);
 ```
 
 ---
@@ -116,6 +117,23 @@ import { style, pickColor } from './style.config.css';
 
 const block = style({
   boxShadow: `0 10px 10px ${pickColor('tahiti-light', 50)}`,
+});
+```
+
+---
+
+## `onDarkMode` method:
+
+The `onDarkMode` method allows you to set different styles for an element when dark mode is enabled.
+
+```js
+import { style, onDarkMode } from './style.config.css';
+
+const block = style({
+  background: 'red',
+  ...onDarkMode({
+    background: 'blue',
+  }),
 });
 ```
 

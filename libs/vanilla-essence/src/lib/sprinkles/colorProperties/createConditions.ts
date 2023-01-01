@@ -5,28 +5,28 @@ import {
   DarkModeMediaConfig,
 } from '../../types';
 
-type CreateDarkModeConditionsReturn<K extends DarkModeConfig> =
+type CreateDarkModeConditionReturn<K extends DarkModeConfig> =
   K extends DarkModeClassConfig
     ? { selector: `${K['className']} &` }
     : K extends DarkModeMediaConfig
     ? { '@media': '(prefers-color-scheme: dark)' }
     : never;
 
-const createDarkModeConditions = <K extends DarkModeConfig>(
+export const createDarkModeCondition = <K extends DarkModeConfig>(
   config: K
-): CreateDarkModeConditionsReturn<K> => {
+): CreateDarkModeConditionReturn<K> => {
   if (!config) return;
 
   if (config.type === 'media') {
     return {
       '@media': '(prefers-color-scheme: dark)',
-    } as CreateDarkModeConditionsReturn<K>;
+    } as CreateDarkModeConditionReturn<K>;
   }
 
   if (config.type === 'class') {
     return {
       selector: `${config.className} &`,
-    } as CreateDarkModeConditionsReturn<K>;
+    } as CreateDarkModeConditionReturn<K>;
   }
 };
 
@@ -39,7 +39,7 @@ type CreateConditionsReturn<K extends DarkModeConfig> =
   K extends DarkModeDisabledConfig
     ? typeof baseConditions
     : typeof baseConditions & {
-        darkMode: ReturnType<typeof createDarkModeConditions<K>>;
+        darkMode: ReturnType<typeof createDarkModeCondition<K>>;
       };
 
 export const createConditions = <DC extends DarkModeConfig>(
@@ -48,7 +48,7 @@ export const createConditions = <DC extends DarkModeConfig>(
   return config.type !== 'disabled'
     ? ({
         ...baseConditions,
-        darkMode: createDarkModeConditions(config),
+        darkMode: createDarkModeCondition(config),
       } as CreateConditionsReturn<DC>)
     : (baseConditions as CreateConditionsReturn<DC>);
 };
