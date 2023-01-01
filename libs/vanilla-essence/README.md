@@ -46,6 +46,8 @@ const combinedClass2 = style([
 
 - **Magic Values:** This adds custom css properties such as `paddingX`, `paddingY`, `marginX`, and `marginY`. You may already know this from the sprinkles API. There it is called `shorthands`. _These settings can be customized in `config.magicProps`_.
 
+- **Pseudo-elements:** This automatically adds `content: ''` when the modifiers `before` and `after` are used. Of course, only if it is not specified with a different value.
+
 - **`responsive` API:** This allows for easy implementation of responsive styling using the same breakpoints as [Tailwind CSS](https://tailwindcss.com/docs/responsive-design). _These settings can be customized in `config.breakpoints`_.
 
 ```js

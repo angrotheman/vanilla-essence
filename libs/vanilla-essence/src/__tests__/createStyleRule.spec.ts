@@ -121,4 +121,29 @@ describe('createStyleRule', () => {
       },
     ]);
   });
+
+  test('styleRule which has pseudo selectors', () => {
+    expect(
+      styleTemplate({
+        background: 'red',
+        ':before': {
+          background: 'blue',
+        },
+        '::after': {
+          content: 'after-content',
+        },
+      })
+    ).toStrictEqual([
+      {
+        background: 'red',
+        ':before': {
+          content: '',
+          background: 'blue',
+        },
+        '::after': {
+          content: 'after-content',
+        },
+      },
+    ]);
+  });
 });

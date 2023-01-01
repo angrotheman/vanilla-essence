@@ -59,12 +59,18 @@ export const convertSingleStyleRule = <
     [k in keyof C['magicProps']]: (value: number | string) => StyleRule;
   };
 }) => {
+  /**
+   * complete styleRule with all pseudo elements and selectors
+   */
   let convertedStyleRule = { ...styleRule };
 
   Object.entries(styleRule).forEach(([prop, val]) => {
+    /**
+     * single styleRule which can be a pseudo or selector styling
+     */
     let convertedVal = val;
 
-    if (typeof val === 'object' && !Array.isArray(val)) {
+    if (typeof convertedVal === 'object' && !Array.isArray(val)) {
       convertedVal = convertSingleStyleRule({
         styleRule: val as CustomStyleRule,
         config,
@@ -124,6 +130,15 @@ export const convertSingleStyleRule = <
       };
 
       return;
+    }
+
+    // add `content: ''` by default
+    const pseudoElements = [':before', '::before', ':after', '::after'];
+    if (pseudoElements.includes(prop) && typeof convertedVal === 'object') {
+      convertedVal = {
+        content: '',
+        ...convertedVal,
+      };
     }
 
     (convertedStyleRule as CustomStyleRule)[prop] = convertedVal;
