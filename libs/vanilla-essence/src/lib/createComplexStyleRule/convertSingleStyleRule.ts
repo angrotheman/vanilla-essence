@@ -2,10 +2,12 @@ import {
   CustomResponsiveStyle,
   CustomStyleRule,
   InitStyleConfig,
+  StyleValue,
 } from '../types';
 import { CSSProperties, StyleRule } from '@vanilla-extract/css';
 import { convertPxToRem } from '../utils/transformValues/convertPxToRem';
 import { createResponsiveStyleRule } from '../createResponsiveStyleRule/index';
+import { deepMergeObject } from '../utils/deepMergeObject';
 
 const forbiddenRemValues: Array<keyof CSSProperties> = [
   'animationIterationCount',
@@ -105,6 +107,19 @@ export const convertSingleStyleRule = <
         ...convertedStyleRule,
         ...convertedMagicValues,
       };
+      return;
+    }
+
+    // magicUtils conversion
+    if (config.magicUtils && Object.keys(config.magicUtils).includes(prop)) {
+      const convertedMagicUtil = config['magicUtils'][prop](val as StyleValue);
+
+      delete convertedStyleRule[prop];
+
+      convertedStyleRule = deepMergeObject(
+        convertedStyleRule,
+        convertedMagicUtil
+      );
       return;
     }
 

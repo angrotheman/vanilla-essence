@@ -6,16 +6,23 @@ import {
   StyleWithSelectors,
 } from '@vanilla-extract/css/dist/declarations/src/types';
 
+export type StyleValue = string | number;
+
 export type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
 export type MagicPropsRule<C extends MagicPropsConfig> = {
-  [k in keyof C]?: number | string;
+  [k in keyof C]?: StyleValue;
+};
+
+export type MagicUtilsRule<C extends MagicUtilsConfig> = {
+  [k in keyof C]?: StyleValue;
 };
 
 export type CustomStyleRule = Record<string, unknown>;
 
 type SingleComplexStyleRule<C extends InitStyleConfig> = StyleRule &
-  MagicPropsRule<C['magicProps']> & {
+  MagicPropsRule<C['magicProps']> &
+  MagicUtilsRule<C['magicUtils']> & {
     '@responsive'?: Omit<CustomResponsiveStyle<C>, 'default'>;
   };
 
@@ -28,15 +35,19 @@ export type CustomResponsiveStyle<C extends InitStyleConfig> = {
 } & {
   [k in keyof C['breakpoints']]?: StyleWithSelectors &
     FeatureQueries<StyleWithSelectors> &
-    MagicPropsRule<C['magicProps']>;
+    MagicPropsRule<C['magicProps']> &
+    MagicUtilsRule<C['magicUtils']>;
 };
 
 export type MagicPropsConfig = { [k in string]: Array<keyof CSSProperties> };
+export type MagicUtilsConfig = {
+  [k in string]: (val: StyleValue) => StyleRule;
+};
 export type RemPropListConfig = Array<keyof CSSProperties> | '*';
 export type BreakpointsConfig = Readonly<{ [k in string]: number }>;
 
 export type MagicValueMethods<K extends MagicPropsConfig> = {
-  [k in keyof K]: (value: number | string) => StyleRule;
+  [k in keyof K]: (value: StyleValue) => StyleRule;
 };
 
 export type DarkModeMediaConfig = {
@@ -86,6 +97,7 @@ export interface InitStyleConfig {
   // useAtomicCSS?: boolean;
   darkMode?: DarkModeConfig;
   magicProps?: MagicPropsConfig;
+  magicUtils?: MagicUtilsConfig;
   remPropList?: RemPropListConfig;
   breakpoints?: BreakpointsConfig;
   colors?: ColorsConfig;

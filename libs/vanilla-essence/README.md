@@ -45,7 +45,23 @@ const combinedClass2 = style([
 
 - **Rem Conversion:** This automatically converts numeric values to rem values for properties such as fontSize, letterSpacing, and lineHeight. _These settings can be customized in `config.remPropList` and it can be enabled for any value using "\*"_.
 
-- **Magic Values:** This adds custom css properties such as `paddingX`, `paddingY`, `marginX`, and `marginY`. You may already know this from the sprinkles API. There it is called `shorthands`. _These settings can be customized in `config.magicProps`_.
+- **Magic Values:** This adds custom CSS properties such as `paddingX`, `paddingY`, `marginX`, and `marginY`. You may already know this from the sprinkles API. There it is called `shorthands`. _These settings can be customized in `config.magicProps`_.
+
+- **Magic Utils:** Works the same as Magic Vaules, but with the ability to add custom methods instead of CSS properties. This helps to simplify properties when they are frequently used in a project.
+
+```js
+initStyle({
+  // ...
+  magicUtils: {
+    backdropBlur: (val) => ({
+      backdropFilter: `blur(var(--backdropBlur))`,
+      vars: {
+        ['--backdropBlur']: typeof val === 'number' ? `${val}px` : val,
+      },
+    }),
+  },
+});
+```
 
 - **Pseudo-elements:** This automatically adds `content: ''` when the modifiers `before` and `after` are used. Of course, only if it is not specified with a different value.
 
@@ -143,7 +159,7 @@ const block = style({
 
 This library provides useful methods to improve readability and type safety.
 
-- **`defineSize`**: To create the css functions `clamp`, `min`, `max` or `minmax` more easily.
+- **`defineSize`**: To create the CSS functions `clamp`, `min`, `max` or `minmax` more easily.
 
   ```js
   import { style } from './style.config.css';

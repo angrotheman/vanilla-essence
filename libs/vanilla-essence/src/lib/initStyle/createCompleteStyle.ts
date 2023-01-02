@@ -1,4 +1,4 @@
-import { CustomComplexStyle, InitStyleConfig } from '../types';
+import { CustomComplexStyle, Expand, InitStyleConfig } from '../types';
 import { style as vanillaStyle } from '@vanilla-extract/css';
 import { createComplexStyleRule } from '../createComplexStyleRule';
 import { createMagicValueCSSClasses } from '../utils/createMagicValueCSSClasses';
@@ -14,7 +14,7 @@ export const createCompleteStyle = <C extends InitStyleConfig>({
     config['magicProps']
   );
 
-  const completeStyle = (givenStyle: StyleProps) =>
+  const completeStyle = (givenStyle: Expand<StyleProps>) =>
     vanillaStyle(
       createComplexStyleRule({
         givenStyle,

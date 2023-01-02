@@ -8,6 +8,14 @@ describe('createStyleRule', () => {
     magicProps: {
       paddingX: ['paddingLeft', 'paddingRight'],
     },
+    magicUtils: {
+      backdropBlur: (val) => ({
+        backdropFilter: `blur(var(--backdropBlur))`,
+        vars: {
+          ['--backdropBlur']: typeof val === 'number' ? `${val}px` : val,
+        },
+      }),
+    },
     remPropList: ['fontSize'],
     breakpoints: {
       sm: 640,
@@ -22,12 +30,16 @@ describe('createStyleRule', () => {
       magicValueMethods: createMagicValueCSSClasses(styleConfig['magicProps']),
     });
 
-  test('styleRule which has magicValues and rem conversion', () => {
+  test('styleRule which has magicValues, magicUtils and rem conversion', () => {
     expect(
       styleTemplate({
         fontSize: 16,
         paddingTop: 16,
         paddingX: 12,
+        backdropBlur: 20,
+        vars: {
+          '--testVar': '20px',
+        },
       })
     ).toStrictEqual([
       {
@@ -35,6 +47,11 @@ describe('createStyleRule', () => {
         paddingTop: 16,
         paddingLeft: 12,
         paddingRight: 12,
+        backdropFilter: 'blur(var(--backdropBlur))',
+        vars: {
+          '--backdropBlur': '20px',
+          '--testVar': '20px',
+        },
       },
     ]);
   });
